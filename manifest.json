@@ -22,8 +22,22 @@
                         ],
         "matches": ["*://*/*"]
     }],
+    "icons": {
+      "16": "MeetMas.png",
+      "32": "MeetMas.png",
+      "48": "MeetMas.png",
+      "64": "MeetMas.png",
+      "128": "MeetMas.png"
+    },  
     "action": {
         "default_popup": "popUp.html",
-        "default_icon": "hello_extensions.png"
+        "default_title": "MeetMas",
+        "default_icon": {
+            "16": "MeetMas.png",
+            "32": "MeetMas.png",
+            "48": "MeetMas.png",
+            "64": "MeetMas.png",
+            "128": "MeetMas.png"
+          }
     }
 }
