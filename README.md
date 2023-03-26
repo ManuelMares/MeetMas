@@ -20,9 +20,6 @@ https://user-images.githubusercontent.com/30966062/227801401-d2720f85-ef01-440a-
 - Keep a persistent register for each meet based on the meeting's ID that can span for an undefined amount of days.
 - allow to set a particular score per participation.
 
-
-
-
 ## About the project
 This is an independent project.
 If you wish to colaborate, send me a message
