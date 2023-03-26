@@ -11,14 +11,16 @@
 5) when the meeting is over, click on the extension's icon in the extensions menu to the right of the search bar of the browser
 6) a csv file will be downloaded with the history of the meeting
 
-## Future plans
-Add the participation buttons also in the chat.
-Keep a persistent register for each meet based on the meeting's ID that can span for an undefined amount of days.
-allow to set a particular score per participation.
-
 
 ## Meet Mas in action
 https://user-images.githubusercontent.com/30966062/227801401-d2720f85-ef01-440a-9dc2-2710d208de30.mp4
+
+## Future plans
+- Add the participation buttons also in the chat.
+- Keep a persistent register for each meet based on the meeting's ID that can span for an undefined amount of days.
+- allow to set a particular score per participation.
+
+
 
 
 ## About the project
