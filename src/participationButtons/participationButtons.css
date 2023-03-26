@@ -1,0 +1,47 @@
+.MeetMas_ButtonsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    width: 55px;
+    height: 100%;
+}
+
+.MeetMas_Button_PositiveParticipation{
+    height: 25px;
+    width: 25px;
+
+    border: none;
+    border-radius: 100%;
+
+    background-color: rgb(7, 136, 7);
+
+    color: white;
+    font-weight: 500;
+}
+    .MeetMas_Button_PositiveParticipation:hover{
+        background-color: rgb(53, 179, 53);
+    }
+    .MeetMas_Button_PositiveParticipation:active{
+        background-color: rgb(89, 205, 89);
+    }
+
+.MeetMas_Button_NegativeParticipation{
+    height: 25px;
+    width: 25px;
+
+    border: none;
+    border-radius: 100%;
+
+    background-color: rgb(7, 54, 136);
+
+    color: white;
+    font-weight: 500;
+}
+    .MeetMas_Button_NegativeParticipation:hover{
+        background-color: rgb(54, 96, 168);
+    }
+    .MeetMas_Button_NegativeParticipation:active{
+        background-color: rgb(100, 137, 200);
+    }

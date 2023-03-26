@@ -1,15 +1,14 @@
 {
     "manifest_version": 3,
-    "name": "Hello Extensions",
-    "description": "Base Level Extension",
+    "name": "MeetMas",
+    "description": "MeetMas adds new features to Google meets on the browser. This version includes the participation register",
     "version": "1.0",
     "permissions": ["storage", "activeTab", "scripting", "tabs", "bookmarks"],
     "background": {"service_worker": "background.js"},
     "content_scripts":[
         {
             "css": [],
-            "js": [ "src/main.js"
-                  ],
+            "js": ["src/helperFunctions.js", "src/classes/Participant.js", "src/classes/Participants.js", "src/classes/Participation.js", "src/main.js"],
             "matches": ["*://*/*"], 
             "match_about_blank": true
         }
@@ -18,12 +17,13 @@
       "extension_page": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
     },
     "web_accessible_resources": [{
-        "resources" :   [   "src/main.html"
+        "resources" :   [   "src/participationButtons/participationButtons.html", "src/participationButtons/participationButtons.css",
+                            "src/notifications/addedParticipation.html", "src/notifications/addedParticipation.css"
                         ],
         "matches": ["*://*/*"]
     }],
     "action": {
-        "default_popup": "hello.html",
+        "default_popup": "popUp.html",
         "default_icon": "hello_extensions.png"
     }
 }

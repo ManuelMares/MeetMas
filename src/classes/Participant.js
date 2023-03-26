@@ -1,12 +1,16 @@
-//import Participation from './Participation';
-
 class Participant {
     constructor(name) {
       this.participations = [];
       this.name = name;
     }
-    get getName(){
+    getParticipations(){
+      return this.participations;
+    }
+    getName(){
       return this.name;
+    }
+    setName(n){
+      this.name = n;
     }
     addParticipation(participation){
       if(participation)

@@ -11,10 +11,10 @@ class Participation {
         this.type = type;
     }
 
-    get getType(){
+    getType(){
         return this.type;
     }
-    get getGrade(){
+    getGrade(){
         return this.grade;
     }
 }
