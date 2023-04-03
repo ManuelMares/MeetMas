@@ -3,13 +3,13 @@
     "name": "MeetMas",
     "description": "MeetMas adds new features to Google meets on the browser. This version includes the participation register",
     "version": "1.0",
-    "permissions": ["storage", "activeTab", "scripting", "tabs", "bookmarks"],
+    "permissions": ["storage", "activeTab", "scripting", "tabs", "bookmarks", "unlimitedStorage"],
     "background": {"service_worker": "background.js"},
     "content_scripts":[
         {
             "css": [],
-            "js": ["src/helperFunctions.js", "src/classes/Participant.js", "src/classes/Participants.js", "src/classes/Participation.js", "src/main.js"],
-            "matches": ["*://*/*"], 
+            "js": ["src/classes/Participation.js", "src/helperFunctions.js", "src/classes/Participant.js", "src/classes/Meet.js", "src/loadMeetingsFiles.js", "src/loadParticipationButtons.js", "src/main.js", "src/downloadParticipationReports.js"],
+            "matches": ["*://meet.google.com/*"], 
             "match_about_blank": true
         }
     ],
@@ -17,10 +17,10 @@
       "extension_page": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
     },
     "web_accessible_resources": [{
-        "resources" :   [   "src/participationButtons/participationButtons.html", "src/participationButtons/participationButtons.css",
+        "resources" :   ["src/participationButtons/participationButtons.html", "src/participationButtons/participationButtons.css",
                             "src/notifications/addedParticipation.html", "src/notifications/addedParticipation.css"
                         ],
-        "matches": ["*://*/*"]
+        "matches": ["*://meet.google.com/*"]
     }],
     "icons": {
       "16": "MeetMas.png",

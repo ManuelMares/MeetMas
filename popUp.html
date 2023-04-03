@@ -4,11 +4,81 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .MeetMascontainer{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: 20rem;
+            background-color: #00ac47;
+        }
+        .MeetMastitle{
+            width: 100%;
+            height: auto;
+            padding: 4rem;
+            align-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+        }
+        .MeetMasFilesContainer{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+            height: auto;
+            background-color: rgb(231, 231, 231);    
+            overflow-y:auto;      
+        }
+        .MeetMas_Meet{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 92%;
+            height: auto;
+            padding: 10px;
+            background-color: #ffba00;
+        }
+            .MeetMas_Meet:hover{
+                background-color: #ffc831;
+            }
+        .MeetMas_MeetData{
+            width: auto;
+            height: auto;
+            font-weight: 700;
+        }
+        .MeetMas_MeetButton{
+            background-color: rgb(26 115 232);
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            padding: 5px 20px;
+            font-weight: 700;
+            color: white;
+        }
+            .MeetMas_MeetButton:hover{
+                background-color: rgb(69, 141, 236);
+            }
+            .MeetMas_MeetButton:active{
+                background-color: rgb(115, 167, 234);
+            }
+    </style>
     <title>Document</title>
 </head>
-<body>
-    <div id="MeetMasReportButton">
-        Report downloaded
+<body style="padding:0; margin:0;border:none;">
+    <div class="MeetMascontainer">
+        <div class="MeetMastitle">
+            MeetMas
+        </div>
+        <div class="MeetMasFilesContainer" id="MeetMasFilesContainer">
+        </div>
     </div>
     
     <script src="popUp.js"></script>
