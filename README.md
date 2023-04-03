@@ -17,8 +17,9 @@ https://user-images.githubusercontent.com/30966062/227801401-d2720f85-ef01-440a-
 
 ## Future plans
 - Add the participation buttons also in the chat.
-- Keep a persistent register for each meet based on the meeting's ID that can span for an undefined amount of days.
-- allow to set a particular score per participation.
+- A button to delete meetings from the local storage
+- A buttons for random call: considers all users, users with less participations, only users in call
+- Nick names for classes
 
 ## About the project
 This is an independent project.
