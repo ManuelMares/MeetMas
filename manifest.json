@@ -8,7 +8,7 @@
     "content_scripts":[
         {
             "css": [],
-            "js": ["src/classes/Participation.js", "src/helperFunctions.js", "src/classes/Participant.js", "src/classes/Meet.js", "src/loadMeetingsFiles.js", "src/loadParticipationButtons.js", "src/main.js", "src/downloadParticipationReports.js"],
+            "js": ["src/classes/Participation.js", "src/helperFunctions.js", "src/classes/Participant.js", "src/classes/Meet.js", "src/ManageStorage.js", "src/loadParticipationButtons.js", "src/extensionController.js", "src/meetController.js", "src/meetingsMenuController.js", "src/main.js"],
             "matches": ["*://meet.google.com/*"], 
             "match_about_blank": true
         }
@@ -18,7 +18,10 @@
     },
     "web_accessible_resources": [{
         "resources" :   ["src/participationButtons/participationButtons.html", "src/participationButtons/participationButtons.css",
-                            "src/notifications/addedParticipation.html", "src/notifications/addedParticipation.css"
+                            "src/notifications/notification.html", "src/notifications/notification.css",
+                            "src/Menus/selectMeeting.html", "src/Menus/menusCSS.css",
+                            "src/Menus/selectMeeting_option.html", "src/edit.svg",  "edit.svg",
+                            "src/Menus/createMeet.html", "src/Menus/editMeetMenu.html"
                         ],
         "matches": ["*://meet.google.com/*"]
     }],

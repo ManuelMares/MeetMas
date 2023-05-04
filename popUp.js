@@ -1,4 +1,8 @@
 let meetings = {}
+let button_ForceReload = document.getElementById("MeetMass_ForceReload");
+console.log(button_ForceReload)
+button_ForceReload.addEventListener('click', e => {sendMessage_ForceReload()});
+
 retrieveMeetings().then(ans =>{  
   let buttonsContainer = document.getElementById("MeetMasFilesContainer");
   let meetingsIds = Object.keys(ans);
@@ -26,6 +30,16 @@ function downloadReport(id){
         }
       )
     })
+}
+
+
+function sendMessage_ForceReload(){
+  return new Promise((resolve, reject) => {      
+    chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+      var activeTab = tabs[0];
+      chrome.tabs.sendMessage(activeTab.id, {type: "popup_forceReload" });
+    });
+  })
 }
 
 function retrieveMeetings(){    
