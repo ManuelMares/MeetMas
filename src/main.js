@@ -30,7 +30,6 @@ let membersButton = null;
 let menu = null;
 let membersMenu = null;
 let chatMenu = null; 
-var addElements = true;
 
 
 

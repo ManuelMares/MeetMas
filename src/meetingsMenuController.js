@@ -122,7 +122,7 @@ async function addMeetOption(meet){
     //delete
     let deleteButton = document.createElement('a');
     deleteButton.innerHTML = "X";
-    deleteButton.setAttribute("class", 'button cancelButton rounded');
+    deleteButton.setAttribute("class", 'button redButton rounded');
     meetOption.appendChild(deleteButton)
     deleteButton.addEventListener('click', (e) => {
         e.stopPropagation();

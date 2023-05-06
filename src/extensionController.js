@@ -2,7 +2,7 @@
 This script is in charge of controlling the extension. This script:
   loads, stores and updates the participation files
   Checks for events in the interface that update the state of the extension
-  Manages the participations events.
+  Manages the interface controls (meetings, reload, etc.)
 
 This file must be loaded before main.js in the manifest
 */
@@ -17,8 +17,86 @@ After making sure the interface of the meet has been loaded, it choses a meet an
 async function StartExtension(){
   await waitForElm("button[aria-label='Chat with everyone']");
   meetId = window.location.href.substring(24);
+  load_interfaceButtons();
   load_MeetingsMenu();
 }
+
+
+async function forceReload(){
+  //if the menu is showing up, hide it first
+  if(!membersMenu.classList.contains("qdulke")){
+    membersButton.click();
+    await delay(500);
+  }  
+  membersButton.click();
+}
+
+async function load_interfaceButtons(){  
+  try {
+    removeHTMLNode_byId("interfaceButtonContainer");
+  } catch (error) {  }
+  let interfaceButtonsContainer = document.createElement("div");
+  interfaceButtonsContainer.setAttribute("class", "interfaceButtonContainer");
+  interfaceButtonsContainer.setAttribute("id", "interfaceButtonContainer");
+  document.body.appendChild(interfaceButtonsContainer)
+  
+  //Hidden interface Menu Button
+  let hideInterfaceMenuButton = document.createElement('button');
+  hideInterfaceMenuButton.setAttribute("class", "interfaceButton");
+  hideInterfaceMenuButton.setAttribute("id", "hideInterfaceMenuButton");
+  hideInterfaceMenuButton.innerHTML = "<";
+  interfaceButtonsContainer.appendChild(hideInterfaceMenuButton)
+  let isHidden = false;
+  hideInterfaceMenuButton.addEventListener("click", (e) =>{
+    if(isHidden){
+      //unhide
+      isHidden = false
+      reloadExtensionButton.style.display = "inline";
+      meetingsMenuButton.style.display = "inline";
+      hideInterfaceMenuButton.innerHTML = "<";
+    }
+    else{
+      //hide
+      reloadExtensionButton.style.display = "none";
+      meetingsMenuButton.style.display = "none";
+      hideInterfaceMenuButton.innerHTML = ">";
+      isHidden = true
+    }
+  })
+
+  
+  //meetingsMenu Button
+  let meetingsMenuButton = document.createElement('button');
+  meetingsMenuButton.setAttribute("class", "interfaceButton");
+  meetingsMenuButton.setAttribute("id", "meetingsMenuButton");
+  meetingsMenuButton.innerHTML = "Meetings";
+  interfaceButtonsContainer.appendChild(meetingsMenuButton)
+
+  meetingsMenuButton.addEventListener("click", (e) =>{
+    load_MeetingsMenu();
+  })
+
+  //Reload extension Button
+  let reloadExtensionButton = document.createElement('button');
+  reloadExtensionButton.setAttribute("class", "interfaceButton");
+  reloadExtensionButton.setAttribute("id", "reloadExtensionButton");
+  reloadExtensionButton.innerHTML = "Reload MeetMas";
+  interfaceButtonsContainer.appendChild(reloadExtensionButton)
+
+  reloadExtensionButton.addEventListener("click", (e) =>{    
+    forceReload();
+  })
+
+  //MeetMasMenu
+
+}
+
+
+
+
+
+
+
 
 /*
 Every time the members menu or the chat shows up, participation button must be added to the users
@@ -39,7 +117,7 @@ When triggered, it reloads the participation buttons in the interface
 function listenForForcedReload(){
   document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.key === 'a')
-      StartExtension();
+    forceReload();
   });
 }
 
@@ -80,6 +158,7 @@ An HTML node
 */
 async function triggerMenus(chatButton, membersButton){
   membersButton.click();
+  chatButton.click();
 }
 
 
@@ -97,13 +176,15 @@ Every time the members menu or the chat shows up, participation button must be a
 It has a delay so the properties of the HTML node have time to get updated
 */
 async function loadParticipationButtons_AfterClick( ){
-  addElements = true;
-  await delay(500);
-  if(!membersMenu.classList.contains("qdulke")){
-    loadParticipationButtons();      //from loadParticipationButtons.js file
-  }  
-  if(!chatMenu.classList.contains("qdulke")){
-  }
+  await loadParticipationButtons();
+  // if(!membersMenu.classList.contains("qdulke")){
+  //   console.log("adding members")
+  //   loadParticipationButtons();
+  // }  
+  // if(!chatMenu.classList.contains("qdulke")){
+  //   console.log("adding chat")
+  //   loadParticipationButtons();
+  // }
 }
 
 

@@ -29,13 +29,16 @@ function setEventListeners_Participant(participationButtons, name){
 }
 
 
+
 function addParticipation(participantId, value){
     let todayDate = getDate_YYYYMMDD();
     currentMeet["participants"][participantId][todayDate] += value;
-    console.log(currentMeet)
     updateMeetInStorage(currentMeet)
     .then(() => {});
 }
+
+
+
 
 
 

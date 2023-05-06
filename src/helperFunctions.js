@@ -46,6 +46,8 @@ function waitForElm(selector) {
 
 
 
+
+
 //usage: selectMeeting_Container.innerHTML = await getTextContent('src/Menus/selectMeeting.html');
 async function getTextContent(dir){  
 return fetch(chrome.runtime.getURL(dir))
@@ -87,24 +89,46 @@ function removeHTMLNode_byId(id){
 }
 
 
+function removeHTMLNode(selector){
+  document.querySelector(id).outerHTML = "";
+}
+
 
 
 async function nofity(message){
+  //create element
   var notification = document.createElement('div');
   notification.innerHTML = await getTextContent('src/notifications/notification.html');
   notification.appendChild( await getCSS('src/notifications/notification.css') ); 
-  console.log(notification);
+  
+  //add message
   document.body.appendChild(notification);
   let messageNode = document.getElementById("meetMas_notification_message");  
   messageNode.innerHTML = message
-  console.log(messageNode);
-  await delay(1700)
+
+  //addEventListener
+  document.getElementById("meetMas_notification_closeButton").addEventListener("click", (e) => {
+    removeHTMLNode_byId("meetMas_notification_Container");
+  })
+
+  //remove after...
+  await delay(1500)
   notification.remove();
 }
 
 
 
-
+function elementExists(query){
+  let el = document.querySelector(query);
+  if(!el)
+    return false;
+  return true;
+}
+function isValidHTML(node){
+  if(node == null)
+    return false;
+  return true;
+}
 
 
 
