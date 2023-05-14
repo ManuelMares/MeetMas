@@ -15,7 +15,7 @@ This function triggers all the methods in the extension.
 After making sure the interface of the meet has been loaded, it choses a meet and start registering participations
 */
 async function StartExtension(){
-  await waitForElm("button[aria-label='Chat with everyone']");
+  await asyncQuery("button[aria-label='Chat with everyone']");
   meetId = window.location.href.substring(24);
   load_interfaceButtons();
   load_MeetingsMenu();
@@ -23,11 +23,8 @@ async function StartExtension(){
 
 
 async function forceReload(){
-  //if the menu is showing up, hide it first
-  if(!membersMenu.classList.contains("qdulke")){
-    membersButton.click();
-    await delay(500);
-  }  
+  chatButton.click();
+  await delay(500);
   membersButton.click();
 }
 
@@ -42,7 +39,7 @@ async function load_interfaceButtons(){
   
   //Hidden interface Menu Button
   let hideInterfaceMenuButton = document.createElement('button');
-  hideInterfaceMenuButton.setAttribute("class", "interfaceButton");
+  hideInterfaceMenuButton.setAttribute("class", "MeetMas_InterfaceButton_hide");
   hideInterfaceMenuButton.setAttribute("id", "hideInterfaceMenuButton");
   hideInterfaceMenuButton.innerHTML = "<";
   interfaceButtonsContainer.appendChild(hideInterfaceMenuButton)
@@ -53,21 +50,24 @@ async function load_interfaceButtons(){
       isHidden = false
       reloadExtensionButton.style.display = "inline";
       meetingsMenuButton.style.display = "inline";
+      tutorialButton.style.display = "inline";
       hideInterfaceMenuButton.innerHTML = "<";
     }
     else{
       //hide
       reloadExtensionButton.style.display = "none";
       meetingsMenuButton.style.display = "none";
+      tutorialButton.style.display = "none";
       hideInterfaceMenuButton.innerHTML = ">";
       isHidden = true
     }
   })
+  createToolTip("Hide/Show extra buttons from the interface", hideInterfaceMenuButton, "hideInterfaceMenuButton");
 
   
   //meetingsMenu Button
   let meetingsMenuButton = document.createElement('button');
-  meetingsMenuButton.setAttribute("class", "interfaceButton");
+  meetingsMenuButton.setAttribute("class", "MeetMas_InterfaceButton");
   meetingsMenuButton.setAttribute("id", "meetingsMenuButton");
   meetingsMenuButton.innerHTML = "Meetings";
   interfaceButtonsContainer.appendChild(meetingsMenuButton)
@@ -75,10 +75,11 @@ async function load_interfaceButtons(){
   meetingsMenuButton.addEventListener("click", (e) =>{
     load_MeetingsMenu();
   })
+  createToolTip("Select a new file where to register participations", meetingsMenuButton, "meetingsMenuButton");
 
   //Reload extension Button
   let reloadExtensionButton = document.createElement('button');
-  reloadExtensionButton.setAttribute("class", "interfaceButton");
+  reloadExtensionButton.setAttribute("class", "MeetMas_InterfaceButton");
   reloadExtensionButton.setAttribute("id", "reloadExtensionButton");
   reloadExtensionButton.innerHTML = "Reload MeetMas";
   interfaceButtonsContainer.appendChild(reloadExtensionButton)
@@ -86,15 +87,41 @@ async function load_interfaceButtons(){
   reloadExtensionButton.addEventListener("click", (e) =>{    
     forceReload();
   })
+  createToolTip("Problems with the participation buttons? Try reloading them (ctrl + a)", reloadExtensionButton, "reloadExtensionButton");
+
+  //Reload extension Button
+  let tutorialButton = document.createElement('button');
+  tutorialButton.setAttribute("class", "MeetMas_InterfaceButton");
+  tutorialButton.setAttribute("id", "tutorialButton");
+  tutorialButton.innerHTML = "Tutorial";
+  interfaceButtonsContainer.appendChild(tutorialButton)
+
+  tutorialButton.addEventListener("click", (e) =>{    
+    openHomePage();
+  })
+  createToolTip("Find out what MeetMas can do for you here", tutorialButton, "tutorialButton");
 
   //MeetMasMenu
+  let meetMasMenuButton = document.createElement('button');
+  meetMasMenuButton.setAttribute("class", "MeetMas_InterfaceButton");
+  meetMasMenuButton.setAttribute("id", "meetMasMenuButton");
+  meetMasMenuButton.innerHTML = "MeetMas Menu";
+  interfaceButtonsContainer.appendChild(meetMasMenuButton)
+
+  meetMasMenuButton.addEventListener("click", (e) =>{    
+    displayMeetMasMenu();
+  })
+  createToolTip("Show more functionalities for your meeting", meetMasMenuButton, "meetMasMenuButton");
 
 }
 
 
 
 
-
+function openHomePage(){
+  window.open("",'_blank');
+  document.body.appendChild();
+}
 
 
 
@@ -135,8 +162,8 @@ async function loadGlobalVariables(){
 This function loads the buttons in global variables in an asyncronous way, to make sure they exist
 */
 async function loadGlobalVariables_buttons(){
-  chatButton = await waitForElm("button[aria-label='Chat with everyone']");
-  membersButton = await waitForElm("button[aria-label='Show everyone']"); 
+  chatButton = await asyncQuery("button[aria-label='Chat with everyone']");
+  membersButton = await asyncQuery("button[aria-label='Show everyone']"); 
   menu = document.querySelector("div[jsname='ME4pNd']");
 }
 
@@ -144,8 +171,8 @@ async function loadGlobalVariables_buttons(){
 This function loads the menus triggered by buttons in global variables in an asyncronous way, to make sure they exist
 */
 async function loadGlobalVariables_menus(){
-  membersMenu = await waitForElm("div[data-tab-id='1']");
-  //chatMenu = await waitForElm("div[data-tab-id='2']");
+  chatMenu = await asyncQuery("div[data-tab-id='2']");
+  membersMenu = await asyncQuery("div[data-tab-id='1']");
 }
 
 /* 
@@ -157,8 +184,9 @@ An HTML node
 An HTML node 
 */
 async function triggerMenus(chatButton, membersButton){
-  membersButton.click();
   chatButton.click();
+  await delay(500); //To give time to the animations to work
+  membersButton.click();
 }
 
 
@@ -175,17 +203,8 @@ function setEventListenersForMenus(){
 Every time the members menu or the chat shows up, participation button must be added to the users
 It has a delay so the properties of the HTML node have time to get updated
 */
-async function loadParticipationButtons_AfterClick( ){
+async function loadParticipationButtons_AfterClick( ){  
   await loadParticipationButtons();
-  // if(!membersMenu.classList.contains("qdulke")){
-  //   console.log("adding members")
-  //   loadParticipationButtons();
-  // }  
-  // if(!chatMenu.classList.contains("qdulke")){
-  //   console.log("adding chat")
-  //   loadParticipationButtons();
-  // }
 }
-
 
 

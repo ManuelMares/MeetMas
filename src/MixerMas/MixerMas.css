@@ -1,0 +1,505 @@
+:root {
+    --MeetMas-red:          #ea1f1f;
+    --MeetMas-red-hover:    #ea6060;
+    --MeetMas-red-active:   #e08181;
+
+    --MeetMas-green:          #ea1f1f;
+    --MeetMas-green-hover:    #ea6060;
+    --MeetMas-green-active:   #e08181;
+    
+    --MeetMas-blue:          #1a73e8;
+    --MeetMas-blue-hover:    #287ae5;
+    --MeetMas-blue-active:   #3f88e9;
+
+    --MeetMas-yellow:           #f4bd00;
+    --MeetMas-yellow-active:    #f1cb4e;
+    --MeetMas-yellow-hover:     #f4d672;
+        
+    --MeetMas-grey:           #3c4043;
+    --MeetMas-grey-active:    #525557;
+    --MeetMas-grey-hover:     #747677;
+    
+    --MeetMas-black:           #0000005c;
+    --MeetMas-black-active:    #23232345;
+    --MeetMas-black-hover:     #3f3f3f45;
+    
+    --MeetMas-white:           #ffffff;
+    --MeetMas-white-active:    #f1f3f4;
+    --MeetMas-white-hover:     #e0e0e0;
+
+    --MeetMas-radious:         5px;
+}
+
+.mixerMas_container{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: auto;
+    background-color: #11111152;
+    position: fixed;
+    z-index: 500;
+    top: calc(50% - 100px);
+    left: 10px;
+    border-radius: 5px;
+    color: white;
+    gap: 10px;
+}
+
+.mixerMas_button {
+    width: 70px;
+    height: auto;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    margin: 10px 5px;
+    background-color: var(--MeetMas-grey);
+}
+    .mixerMas_button:hover{
+        cursor: pointer;
+        background-color: var(--MeetMas-grey-hover);
+    }
+    .mixerMas_button:active{
+        cursor: pointer;
+        background-color: var(--MeetMas-grey-active);
+    }
+
+.mixerMas_hideButton{
+    width: 120px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px 5px 0px 0px;
+    border: none;
+    background-color: var(--MeetMas-black);
+    color: white;
+}
+    .mixerMas_hideButton:hover{
+        cursor: pointer;
+        background-color: var(--MeetMas-black-hover);
+    }
+    .mixerMas_hideButton:active{
+        cursor: pointer;
+        background-color: var(--MeetMas-black-active);
+    }
+
+
+
+
+
+
+
+
+/*=================================================dice=================================================*/
+
+.mixerMas_DiceContainer{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+    background-color: #9b9494b3;
+}
+
+.mixerMas_dice{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 3s ease-in-out;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+}
+
+.mixerMas_diceFace{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    line-height: 200px;
+    text-align: center;
+    font-size: 40px;
+    border: solid 2px var(--MeetMas-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.mixerMas_dice_front{
+    transform: rotateY(0deg) translateZ(100px);
+}
+.mixerMas_dice_back{
+    transform: rotateY(180deg) translateZ(100px);
+}
+.mixerMas_dice_right{
+    transform: rotateY(90deg) translateZ(100px);
+}
+.mixerMas_dice_left{
+    transform: rotateY(-90deg) translateZ(100px);
+}
+.mixerMas_dice_top{
+    transform: rotateX(90deg) translateZ(100px);
+}
+.mixerMas_dice_bottom{
+    transform: rotateX(-90deg) translateZ(100px);
+}
+.mixerMas_spinDice{
+    position: relative;
+    top: calc(50% - 50px);
+    left: calc(50% - 100px);
+    width: 204px;
+    height: auto;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    font-weight: 600;
+    background-color: var(--MeetMas-yellow);
+}
+    .mixerMas_spinDice:hover{
+            background-color: var(--MeetMas-yellow-hover);
+    }
+    .mixerMas_spinDice:active{
+            background-color: var(--MeetMas-yellow-active);
+    }
+.mixerMas_closeDice{
+    position: relative;
+    top: 20px;
+    left: 90%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    background-color: var(--MeetMas-grey);
+    font-size: 20px;
+}
+    .mixerMas_closeDice:hover{
+        background-color: var(--MeetMas-grey-hover);
+    }
+    .mixerMas_closeDice:active{
+        background-color: var(--MeetMas-grey-active);
+    }
+
+
+.MixerMas_diceImage{
+    height: auto;
+    width: 160px;
+    padding: 20px;
+}
+.MixerMas_diceImage1{
+    height: 80px;
+    width: 80px;
+    padding: 20px;
+}
+
+
+
+
+
+/*=================================================Random letter=================================================*/
+
+.MixerMas_RL_container{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+    background-color: #9b9494b3;
+}
+
+.MixerMas_RL_getLetter{    
+    position: relative;
+    top: calc(50% - 50px);
+    left: 50%;
+    width: 204px;
+    height: auto;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    font-weight: 600;
+    background-color: var(--MeetMas-yellow);
+}
+    .MixerMas_RL_getLetter:hover{
+            background-color: var(--MeetMas-yellow-hover);
+    }
+    .MixerMas_RL_getLetter:active{
+            background-color: var(--MeetMas-yellow-active);
+    }
+
+.MixerMas_RL_close{
+    position: relative;
+    top: 20px;
+    left: 90%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    background-color: var(--MeetMas-grey);
+    font-size: 20px;
+}
+    .MixerMas_RL_close:hover{
+        background-color: var(--MeetMas-grey-hover);
+    }
+    .MixerMas_RL_close:active{
+        background-color: var(--MeetMas-grey-active);
+    }
+
+.MixerMas_RL_Result{
+    min-width: 200px;
+    height: 200px;
+    position: relative;
+    top: calc(50% - 100px);
+    left: calc(50% - 150px);
+    color: var(--MeetMas-blue);
+    font-size: 50px;
+    text-shadow: 0 0 2px black;
+    text-overflow: ellipsis;
+    flex-flow: nowrap;
+    white-space: nowrap;
+    overflow: auto;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+
+
+
+
+.MixerMas_options_container{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 80vh;
+    background-color: white;
+    left: 40px;
+    padding: 10px;
+    column-gap: 10px;
+    row-gap: 10px;
+    border-radius: 10px;
+}
+.MixerMas_options_title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+.MixerMas_options_description{
+    flex: 3;
+}
+.MixerMas_options_input{
+    flex: 4;
+}
+.MixerMas_options_displayOptions{
+    flex: 10;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    overflow-x: hidden;
+}
+.MixerMas_options_option{
+    width: calc(100% - 20px);
+    height: 25px;
+    padding: 0 10px;
+    font-weight: 400;
+    border-radius: 5px;
+    flex-flow: nowrap;
+    display: flex;
+    white-space: nowrap;
+}
+    .MixerMas_options_option:hover{
+        background-color: var(--MeetMas-white-hover);
+    }
+    .MixerMas_options_option:active{
+        background-color: var(--MeetMas-white-active);
+    }
+.MixerMas_options_button{
+    height: auto !important;
+}
+.MixerMas_options_errorMessage{
+    color: #ff1a1a;
+    font-weight: 700;
+}
+
+
+
+
+/*=========================================RN================================================================= */
+
+.MixerMas_RN_container{    
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+    background-color: #9b9494b3;
+}
+
+.MixerMas_RN_close{
+    position: relative;
+    top: 20px;
+    left: 90%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    background-color: var(--MeetMas-grey);
+    font-size: 20px;
+}
+    .MixerMas_RN_close:hover{
+        background-color: var(--MeetMas-grey-hover);
+    }
+    .MixerMas_RN_close:active{
+        background-color: var(--MeetMas-grey-active);
+    }
+
+.MixerMas_RN_options_container{
+    width: 490px;
+    height: auto;
+    position: absolute;
+    top: calc(50% - 220px);
+    left: calc(50% - 200px);
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.MixerMas_RN_options_instruction{
+    font-weight: 500;
+    font-size: 18px;
+    color: #726969;
+}
+.MixerMas_RN_input{
+    padding: 0 20px;
+}
+.MixerMas_RN_Result{
+    min-width: 200px;
+    height: 200px;
+    position: relative;
+    top: calc(50% - 100px);
+    left: calc(50% - 200px);
+    color: var(--MeetMas-blue);
+    font-size: 50px;
+    text-shadow: 0 0 2px black;
+    text-overflow: ellipsis;
+    flex-flow: nowrap;
+    white-space: nowrap;
+    overflow: auto;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.MixerMas_RN_getNumber{    
+    position: relative;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    width: 204px;
+    height: auto;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    font-weight: 600;
+    background-color: var(--MeetMas-yellow);
+}
+    .MixerMas_RN_getNumber:hover{
+            background-color: var(--MeetMas-yellow-hover);
+    }
+    .MixerMas_RN_getNumber:active{
+            background-color: var(--MeetMas-yellow-active);
+    }
+
+
+
+
+
+.MeetMas_toolTip{
+    height: auto;
+    background-color: #3d3d3d;
+    position: absolute;
+    color: white;
+    width: auto;
+    max-width: 300px;
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 5px;
+    top: 26px;
+    left: 5px;
+    z-index: 10;
+    animation-name: appear;
+    animation-duration: 1s;
+}
+@keyframes appear{
+    0% {
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0);
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0);
+    }
+    100% {
+        background-color: #3d3d3d;
+        color: white;
+    }
+}
+
+
+.MeetMas_button{
+    border: none;
+
+    width: auto;
+    height: 20px;
+    min-width: 30px;
+    padding: 5px 15px;
+    margin: 0;
+        
+    color: white;
+    
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.MeetMas_acceptButton{
+    background-color: var(--MeetMas-blue);
+}
+    .MeetMas_acceptButton:hover{    
+        cursor: pointer;
+        background-color: var(--MeetMas-blue-hover);
+    }
+    .MeetMas_acceptButton:active{    
+        background-color: var(--MeetMas-blue-active);
+    }

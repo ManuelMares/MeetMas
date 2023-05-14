@@ -1,280 +1,93 @@
-.Menus_selectMeeting{
-    background-color: white;
-    position: fixed;
-    width: 80%;
-    height: 80%;
-    z-index: 1000;
-    top: 10%;
-    left: 10%;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-    border-radius: 10px;
-    box-shadow: 0px 2px 10px #3d3d3d;
+:root {
+    --MeetMas-red:          #ea1f1f;
+    --MeetMas-red-hover:    #ea6060;
+    --MeetMas-red-active:   #e08181;
+
+    --MeetMas-green:          #ea1f1f;
+    --MeetMas-green-hover:    #ea6060;
+    --MeetMas-green-active:   #e08181;
+    
+    --MeetMas-blue:          #1a73e8;
+    --MeetMas-blue-hover:    #287ae5;
+    --MeetMas-blue-active:   #3f88e9;
+
+    --MeetMas-yellow:           #f4bd00;
+    --MeetMas-yellow-active:    #f1cb4e;
+    --MeetMas-yellow-hover:     #f4d672;
+        
+    --MeetMas-grey:           #3c4043;
+    --MeetMas-grey-active:    #525557;
+    --MeetMas-grey-hover:     #747677;
+    
+    --MeetMas-black:           #0000005c;
+    --MeetMas-black-active:    #23232345;
+    --MeetMas-black-hover:     #3f3f3f45;
+    
+    --MeetMas-white:           #ffffff;
+    --MeetMas-white-active:    #f1f3f4;
+    --MeetMas-white-hover:     #e0e0e0;
+
+    --MeetMas-radious:         5px;
 }
-.Menus_selectMeeting_header{
-    background-color: #8ab4f8;
+
+/* MEETING OPTION=============================== */
+.MeetMas_SelectMeeting_MeetOption_container{
     width: calc(100% - 20px);
-    height: auto;
-    padding: 10px;
-    font-size: 30px;
-    font-weight: 800;
-    display: flex;
-    justify-content: space-around;
-    overflow: hidden;
-    border-radius: 10px 10px 0 0;
-}
-.Menus_selectMeeting_meetsOptions{
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-}
-.Menus_newMeetingButton{    
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: 700;
-    background-color: #078807;
-}
-    .Menus_newMeetingButton:hover{    
-        background-color: #36a036;
-    }
-    .Menus_newMeetingButton:active{    
-        background-color: #52ae52;
-    }
-.Menus_selectMeeting_closeButton{    
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: 700;
-    background-color: #ea1f1f;
-}
-    .Menus_selectMeeting_closeButton:hover{    
-        background-color: #ea6060;
-    }
-    .Menus_selectMeeting_closeButton:active{   
-        background-color: #e08181;
-    }
-
-
-
-.Menus_selectMeeting_option{
-    width: calc(100% - 20px);
-    height: auto;
-    overflow: hidden;
+    height: min-content;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: row;
-    background-color: #f1f3f4;
     border: none;
     margin: 10px 0;
     padding: 5px 10px;
     border-radius: 5px;
+    background-color: var(--MeetMas-white);
 }
-.Menus_selectMeeting_option:hover{
-    background-color: rgb(219, 218, 218);
-}
-.Menus_selectMeeting_title{
+    .MeetMas_SelectMeeting_MeetOption_container:hover{
+        background-color: var(--MeetMas-white-hover);
+    }
+
+.MeetMas_SelectMeeting_MeetOption_title{
     margin: 0;
     width: 30%;
     overflow: hidden;
     white-space: nowrap;
 }
-.Menus_selectMeeting_link{
+.MeetMas_SelectMeeting_MeetOption_link{
     margin: 0;
     width: 30%;
     overflow: auto;
     white-space: nowrap;
 }
-.Menus_selectMeeting_EditButton{
-    height: 20px;
-    width: 8%;
-    background-color: #f4bd00;
-    padding: 2px;
-    border-radius: 4px;
-}
-    .Menus_selectMeeting_EditButton:hover{
-        background-color: #f1cb4e;
-    }
-    .Menus_selectMeeting_EditButton:active{
-        background-color: #f4d672;
-    }
+
 .Menus_selectMeeting_EditIcon{
     height: 100%;
 }
 
-.Menus_selectMeeting_DeleteButton{
-    height: 20px;
-    width: 8%;
-    padding: 2px;
-    border-radius: 4px;
-    color: rgb(255, 255, 255);
-    line-height: 20px;
-    background-color: #ea1f1f;
-}
-    .Menus_selectMeeting_DeleteButton:hover{
-        background-color: #ea6060;
-    }
-    .Menus_selectMeeting_DeleteButton:active{
-        background-color: #e08181;
-    }
+
+/* END============================================ */
 
 
 
-.MeetMas_createMeet_background{
-    width: 100%;
-    height: 100%;
-    background-color: #0000002e;
-    z-index: 2000;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.MeetMas_createMeet_container{
-    width: 60%;
-    height: 80%;
-    background-color: white;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0px 2px 10px #3d3d3d9e;
-}
-.MeetMas_createMeet_header{
-    width: 100%;
-    height: auto;
-    display: flex;
-}
-.MeetMas_createMeet_header_container{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
-    overflow: hidden;    
-}  
-    .MeetMas_createMeet_Body_ErrorMessage{
-        color:red;
-    }
-    .MeetMas_createMeet_Body{    
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: start;
-        justify-content: center;
-        flex-direction: column;
-    }
-    .MeetMas_createMeet_id{    
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: start;
-        justify-content: flex-start;
-        overflow: hidden;
-        flex-direction: column;
-        margin: 10px;
-    }
-        .MeetMas_createMeet_id p{
-            margin:0;
-        }
-    .MeetMas_createMeet_link{ 
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: start;
-        justify-content: flex-start;
-        overflow: hidden;
-        flex-direction: column;
-        margin: 10px;
-    }
-    .MeetMas_createMeet_link p{
-        margin:0;
-    }
-    .MeetMas_createMeet_Name{ 
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: start;
-        justify-content: flex-start;
-        overflow: hidden;
-        flex-direction: column;
-        margin: 10px;
-    }
-    .MeetMas_createMeet_Name p{
-        margin:0;
-    }
-.MeetMas_createMeet_header_closeButton{
-    width: 60px;
-    border-radius: 0 5px 0 0;
-    border:none;
-    color:white;
-    background-color: #ea1f1f;
-}
-    .MeetMas_createMeet_header_closeButton:hover{
-        background-color: #ea6060;
-    }
-    .MeetMas_createMeet_header_closeButton:active{
-        background-color: #e08181;
-    }
-.MeetMas_createMeet_footer{
-    width: 100%;
-    height: auto;
-}
-.MeetMas_createMeet_footer_createButton{
-    border: none;
-    padding: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    color: white;
-    width: 100%;
-    background-color: #078807;
-}
-    .MeetMas_createMeet_footer_createButton:hover{    
-        background-color: #36a036;
-    }
-    .MeetMas_createMeet_footer_createButton:active{    
-        background-color: #56ab56;
-    }
+/*GENERIC CLASES======================================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* CLASES======================================================== */
-.text{
+/* ---------------------text-------------------------------- */
+.MeetMas_text{
     font-size: 17px;
     padding: 0 10px;
     margin: 5px;
+    max-width: 90%;
 }
-.bold{
+.MeetMas_bold{
     font-weight: 700;
 }
+/* ----------------------------------------------------------- */
 
-.marginx{
-    margin: 0 10px;
-}
 
-.background{
+
+/* ---------------------sections-------------------------------- */
+.MeetMas_background{
     width: 100%;
     height: 100%;
     background-color: #0000002e;
@@ -285,7 +98,8 @@
     justify-content: center;
     align-items: center;
 }
-.menu{
+
+.MeetMas_menu{
     position: fixed;
 
     display: flex;
@@ -302,77 +116,46 @@
     background-color: white;
     box-shadow: 0px 2px 10px #3d3d3d;
 }
-.Header{
+.MeetMas_header{
     width: 100%;
-    height: auto;
+    height:10%;
     display: flex;
 }
-    .header_title{      
-        width: calc(100% - 40px);
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        font-size: 25px;
-        overflow: hidden;
-        padding: 0 35px;
-    }
-    .cancelButton{
-        width: 40px;
-        height: 40px;
-        border-radius: 100%;
-        border: none;
-        color: #5f6368;
-        font-weight: 500;
-        font-size: 20px;
-        margin: 4px;
-        line-height: 40px;
-        padding: 0;
-        background-color: white;
-    }
-        .cancelButton:hover{
-            cursor: pointer;
-            background-color: #f1f3f4;
-        }
-        .cancelButton:active{
-            background-color: #e0e0e0;
-        }
-    .body{
-        width: 100%;
-        height: auto;
-        display: flex;
-        align-items: start;
-        justify-content: center;
-        flex-direction: column;
-        
-    padding: 10px;
-    }
-    .footer{
-        width: 100%;
-        height: auto;
-    }
-        .footer_button{
-            border: none;
-            padding: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            color: white;
-            width: 100%;
-            border-radius: 0 0 5px 5px;
-        }
-
-
-
-
-
-
-
-.rounded{
-    border-radius: 5px;
+.MeetMas_headerTitle{      
+    width: calc(100% - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 25px;
+    overflow: hidden;
+    padding: 0 35px;
 }
 
 
+.MeetMas_body{
+    width: calc(100% - 20px);
+    height: 80%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;    
+    padding: 10px;
+    overflow-y: auto;
+}
+.MeetMas_footer{
+    width: 100%;
+    height: 10%;
+}
+/* ----------------------------------------------------------- */
 
-.button{
+
+
+
+
+/* ---------------------buttons-------------------------------- */
+
+
+.MeetMas_button{
     border: none;
 
     width: auto;
@@ -387,38 +170,143 @@
     line-height: 20px;
 }
 
-.acceptButton{
-    background-color: #1a73e8;
+.MeetMas_acceptButton{
+    background-color: var(--MeetMas-blue);
 }
-    .acceptButton:hover{    
+    .MeetMas_acceptButton:hover{    
         cursor: pointer;
+        background-color: var(--MeetMas-blue-hover);
     }
-    .acceptButton:active{    
-        background-color: #1162cc;
+    .MeetMas_acceptButton:active{    
+        background-color: var(--MeetMas-blue-active);
     }
 
-.redButton{
-    background-color: #ea1f1f;
+.MeetMas_cancelButton{
+    background-color: var(--MeetMas-red);
 }
-    .redButton:hover{
+    .MeetMas_cancelButton:hover{
         cursor: pointer;
-        background-color: #ea6060;
+        background-color: var(--MeetMas-red-hover);
     }
-    .redButton:active{
-        background-color: #e08181;
+    .MeetMas_cancelButton:active{
+        background-color: var(--MeetMas-red-active);
     }
 
   
-.editButton{
-    background-color: #f4bd00;
+.MeetMas_editButton{
+    background-color: var(--MeetMas-yellow);
 }
-    .editButton:hover{
+    .MeetMas_editButton:hover{
         cursor: pointer;
-        background-color: #f1cb4e;
+        background-color: var(--MeetMas-yellow-hover);
     }
-    .editButton:active{
-        background-color: #f4d672;
+    .MeetMas_editButton:active{
+        background-color: var(--MeetMas-yellow-active);
     }
+
+.MeetMas_hoverOption{
+    background-color: var(--MeetMas-white);
+}
+.MeetMas_hoverOption:hover{
+    background-color: var(--MeetMas-white-hover);
+}
+
+.MeetMas_closeButton{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: none;
+    color: #5f6368;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 4px;
+    line-height: 40px;
+    padding: 0;
+    background-color: var(--MeetMas-white);
+}
+    .MeetMas_closeButton:hover{
+        cursor: pointer;
+        background-color: var(--MeetMas-white-hover);
+    }
+    .MeetMas_closeButton:active{
+        background-color: var(--MeetMas-white-active);
+    }
+
+
+.MeetMas_InterfaceButton{
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    margin: 10px 5px;
+    background-color: var(--MeetMas-grey);
+}
+    .MeetMas_InterfaceButton:hover{
+        cursor: pointer;
+        background-color: var(--MeetMas-grey-hover);
+    }
+    .MeetMas_InterfaceButton:active{
+        background-color: var(--MeetMas-grey-active);
+    }
+
+.MeetMas_ReplyButton{
+    height: auto;
+    color: var(--MeetMas-yellow);
+    background-color: transparent;
+    border: none;
+    font-weight: 700;
+    margin: 0 5px;
+}
+    .MeetMas_ReplyButton:hover{
+        cursor: pointer;
+        color: var(--MeetMas-yellow-hover);
+    }
+    .MeetMas_ReplyButton:active{
+        color: var(--MeetMas-yellow-active);
+    }
+
+
+
+    
+.MeetMas_footerButton{
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    height: 100%;
+}
+
+.MeetMas_longButton{
+    width: calc(100% - 20px);
+    height: auto;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------- */
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
 
 .MeetMas_errorMessage{
     color:red;
@@ -450,14 +338,19 @@
     left: 10%;
     background-color: white;
     box-shadow: 0px 2px 10px #3d3d3d;
-    padding: 10px;
 }
 
 .height100{    
     height: 100%;
 }
 
+.MeetMas_xmargin{
+    margin: 0 10px;
+}
 
+.MeetMas_rounded{
+    border-radius: var(--MeetMas-radious);
+}
 
 
 
@@ -469,27 +362,116 @@
     height: auto;
     width: auto;
     position: fixed;
-    z-index: 2000;
+    z-index: 500;
     top: 10px;
     left: 10px;
-    padding: 5px 15px;
-    border-radius: 10px;
+    background-color: #11111152;
+    border-radius: 5px;
+    color: white;
+    gap: 10px;
+    display: flex;
+    padding-right: 10px;
 }
-    .interfaceButton{
-        width: auto;
-        height: auto;
-        border-radius: 10px;
-        border: none;
-        color: white;
-        padding: 10px;
-        font-weight: 600;
-        margin: 0 5px;
-        background-color: #3c4043;
+
+.MeetMas_InterfaceButton_hide{
+    width: auto;
+    height: 60px;
+    border-radius: 5px 0 0 5px;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    background-color: var(--MeetMas-black);
+}
+    .MeetMas_InterfaceButton_hide:hover{
+        cursor: pointer;
+        background-color: var(--MeetMas-black-hover);
     }
-        .interfaceButton:hover{
-            cursor: pointer;
-            background-color: #525557;
-        }
-        .interfaceButton:active{
-            background-color: #747677;
-        }
+    .MeetMas_InterfaceButton_hide:active{
+        background-color: var(--MeetMas-black-active);
+    }
+    
+
+
+
+
+.Menus_selectMeeting_meetsOptions_container{
+    width: 100%;
+    height: -webkit-fill-available;
+}
+
+/*MeetMas Menu======================================================== */
+
+.MeetMas_meetMasMenu_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+}
+.MeetMas_meetMasMenu_ButtonsContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    width: 100%;
+    padding: 10px;
+}
+.MeetMas_meetMasMenu_Participants{
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;    
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+.MeetMas_meetMasMenu_Participant{    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 10px;
+}
+.MeetMas_meetMasMenu_Participant_name{
+    font-weight: 500;
+    display: flex;
+    flex-flow: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0px 10px 0px 0px;
+    font-size: 14px;
+}
+/* END============================================ */
+
+
+.MeetMas_toolTip{
+    height: auto;
+    background-color: #3d3d3d;
+    position: absolute;
+    color: white;
+    width: auto;
+    max-width: 300px;
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 5px;
+    top: 26px;
+    left: 5px;
+    z-index: 10;
+    animation-name: appear;
+    animation-duration: 1s;
+}
+@keyframes appear{
+    0% {
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0);
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0);
+    }
+    100% {
+        background-color: #3d3d3d;
+        color: white;
+    }
+}

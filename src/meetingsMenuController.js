@@ -79,14 +79,14 @@ Creates the HTML controller object for each meeting in the meetingsMenu.
 This element gives addEventListeners overs loading a meeting, editing it, or deleting it.
 */
 async function addMeetOption(meet){
-    let meetingsContainer = document.getElementById("Menus_selectMeeting_meetsOptions")
+    let meetingsContainer = document.getElementById("Menus_selectMeeting_meetsOptions_container");
     let meetOption = document.createElement('button');
-    meetOption.setAttribute("class", "Menus_selectMeeting_option");
+    meetOption.setAttribute("class", "MeetMas_SelectMeeting_MeetOption_container");
     
     //chose
     let selectButton = document.createElement('a');
     selectButton.innerHTML = "Select";
-    selectButton.setAttribute("class", 'button acceptButton rounded');
+    selectButton.setAttribute("class", 'MeetMas_button MeetMas_acceptButton MeetMas_rounded');
     meetOption.appendChild(selectButton)
     selectButton.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -97,18 +97,18 @@ async function addMeetOption(meet){
     //title
     let title = document.createElement('p');
     title.innerHTML = meet["meetName"];
-    title.setAttribute("class", 'Menus_selectMeeting_title');
+    title.setAttribute("class", 'MeetMas_SelectMeeting_MeetOption_title');
     meetOption.appendChild(title)
     
     //link
     let link = document.createElement('p');
     link.innerHTML = meet["meetLink"];
-    link.setAttribute("class", 'Menus_selectMeeting_link');
+    link.setAttribute("class", 'MeetMas_SelectMeeting_MeetOption_link');
     meetOption.appendChild(link)
     
     //edit
     let editButton = document.createElement('a');
-    editButton.setAttribute("class", 'button editButton rounded');    
+    editButton.setAttribute("class", 'MeetMas_button MeetMas_editButton MeetMas_rounded');    
         let editIcon = document.createElement('img');
         editIcon.setAttribute("src", 'chrome-extension://'+meetMasId+'/edit.svg');
         editIcon.setAttribute("class", "Menus_selectMeeting_EditIcon");
@@ -122,7 +122,7 @@ async function addMeetOption(meet){
     //delete
     let deleteButton = document.createElement('a');
     deleteButton.innerHTML = "X";
-    deleteButton.setAttribute("class", 'button redButton rounded');
+    deleteButton.setAttribute("class", 'MeetMas_button MeetMas_cancelButton MeetMas_rounded');
     meetOption.appendChild(deleteButton)
     deleteButton.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -140,7 +140,7 @@ async function addMeetOption(meet){
 Deletes the HTML node of the MeetingsMenu from the interface
 */
 function close_MeetingsMenu(){
-    removeHTMLNode_byId("Menus_selectMeeting");
+    removeHTMLNode_byId("MeetMas_SelectMeeting_background");
 }
 
 
@@ -152,17 +152,6 @@ This section contains the functionality triggered by the buttons generated in th
     *delete a meeting
     *create a new meeting
 */
-
-
-
-
-
-
-
-
-
-
-
 
 // LOAD MEET=========================================================================================
 /*
@@ -183,7 +172,7 @@ function loadMeet(meetId){
         if(gotMeet){
             close_MeetingsMenu();
             startRegistering();
-            nofity("meet " + meetId + " has been selected");
+            notify("meet " + meetId + " has been selected", meetId);
         }        
     })
 }

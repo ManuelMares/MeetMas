@@ -5,10 +5,12 @@ This function returns a promise to garantee that the indicated time ocurred
 @param timeMs
 An integer indicating the time to wait for in ms
 */
-const delay = (timeMs) => {
-return new Promise(resolve => {
-    setTimeout(resolve, timeMs)
-});
+const delay = (timeInMs) => {
+  return new Promise(resolve => {    
+      setTimeout(function() {
+        resolve();
+      }, timeInMs)
+  });
 }
 
 
@@ -20,7 +22,7 @@ All process will stop until the element exists
 @param selector
 A selector property from the element to wait for
 */
-function waitForElm(selector) {
+function asyncQuery(selector) {
     return new Promise(resolve => {
         if (document.querySelector(selector)) {
             return resolve(document.querySelector(selector));
@@ -39,6 +41,39 @@ function waitForElm(selector) {
 }
 
 
+
+
+async function createToolTip(message, father, id){
+  let toolTip = getToolTipHTML(message, id);  
+  
+  //delete tool tip if it exists
+  document.addEventListener('mousemove', async ()=>{
+    if(!elementExists("#MeetMas_toolTip"+id)){
+      father.style.position = "";
+    }
+    removeHTMLNode("#MeetMas_toolTip"+id) 
+  })
+
+  //add tooltip if necessary and it does not exists
+  document.addEventListener('mousemove', async ()=>{
+    await delay(1000);
+    if( father.matches(':hover') ){
+      if(!elementExists("#MeetMas_toolTip"+id)){
+        father.style.position = "relative";
+        father.appendChild(toolTip)    
+      }
+    }
+  })
+
+}
+
+function getToolTipHTML(message, id){
+  let toolTip = document.createElement("div");
+  toolTip.setAttribute("class", "MeetMas_toolTip");
+  toolTip.setAttribute("id", "MeetMas_toolTip" + id);
+  toolTip.innerHTML = message;
+  return toolTip;
+}
 
 
 
@@ -90,25 +125,77 @@ function removeHTMLNode_byId(id){
 
 
 function removeHTMLNode(selector){
-  document.querySelector(id).outerHTML = "";
+  if(elementExists(selector)){
+    document.querySelector(selector).remove();
+  }
+
+  if(elementExists(selector))
+    document.querySelector(selector).outerHTML = "";
+
+  //In case in needs TrustedHTML assignment
 }
 
 
 
-async function nofity(message){
+async function Message(message, id){
   //create element
   var notification = document.createElement('div');
+  notification.setAttribute("id", "notification"+id)
   notification.innerHTML = await getTextContent('src/notifications/notification.html');
   notification.appendChild( await getCSS('src/notifications/notification.css') ); 
   
-  //add message
+  //put in body
   document.body.appendChild(notification);
-  let messageNode = document.getElementById("meetMas_notification_message");  
-  messageNode.innerHTML = message
+
+  //update all names to include the id
+  //container
+  let container = document.getElementById("meetMas_notification_Container");
+  container.setAttribute("id", "meetMas_notification_Container" + id);
+  //text
+  let text = document.getElementById("meetMas_notification_message");
+  text.setAttribute("id", "meetMas_notification_message" + id);
+  //button
+  let button = document.getElementById("meetMas_notification_closeButton");
+  button.setAttribute("id", "meetMas_notification_closeButton" + id);
+  
+  //set message
+  text.innerHTML = message
 
   //addEventListener
-  document.getElementById("meetMas_notification_closeButton").addEventListener("click", (e) => {
-    removeHTMLNode_byId("meetMas_notification_Container");
+  button.addEventListener("click", (e) => {
+    removeHTMLNode_byId("notification"+id);
+  })
+
+}
+
+
+async function notify(message, id){
+  //create element
+  var notification = document.createElement('div');
+  notification.setAttribute("id", "notification"+id)
+  notification.innerHTML = await getTextContent('src/notifications/notification.html');
+  notification.appendChild( await getCSS('src/notifications/notification.css') ); 
+  
+  //put in body
+  document.body.appendChild(notification);
+
+  //update all names to include the id
+  //container
+  let container = document.getElementById("meetMas_notification_Container");
+  container.setAttribute("id", "meetMas_notification_Container" + id);
+  //text
+  let text = document.getElementById("meetMas_notification_message");
+  text.setAttribute("id", "meetMas_notification_message" + id);
+  //button
+  let button = document.getElementById("meetMas_notification_closeButton");
+  button.setAttribute("id", "meetMas_notification_closeButton" + id);
+  
+  //set message
+  text.innerHTML = message
+
+  //addEventListener
+  button.addEventListener("click", (e) => {
+    removeHTMLNode_byId("notification"+id);
   })
 
   //remove after...
@@ -138,8 +225,6 @@ function isValidHTML(node){
 
 
 function downloadParticipationReport(meeting){
-    console.log("we are requested something")
-    console.log(meeting)
     let csvContent = meetingToCSV(meeting);
     let docTitle = meeting["title"]["id"] + ".csv";
   

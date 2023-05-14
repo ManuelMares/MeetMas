@@ -20,11 +20,11 @@ function setEventListeners_Participant(participationButtons, name){
 
     positiveP_Button.addEventListener('click', e => {
         addParticipation(name, 1); 
-        nofity("Positive participation added to: " + name);
+        notify("Positive participation added to: " + name, name);
     });
     negativeP_Button.addEventListener('click', e => {
         addParticipation(name, -1); 
-        nofity("Negative participation added to: " + name);
+        notify("Negative participation added to: " + name, name);
     });
 }
 
@@ -32,6 +32,8 @@ function setEventListeners_Participant(participationButtons, name){
 
 function addParticipation(participantId, value){
     let todayDate = getDate_YYYYMMDD();
+    if( !(todayDate in currentMeet["participants"][participantId]) )
+        currentMeet["participants"][participantId][todayDate] = 0;
     currentMeet["participants"][participantId][todayDate] += value;
     updateMeetInStorage(currentMeet)
     .then(() => {});

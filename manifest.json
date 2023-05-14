@@ -1,30 +1,57 @@
 {
     "manifest_version": 3,
     "name": "MeetMas",
-    "description": "MeetMas adds new features to Google meets on the browser. This version includes the participation register",
+    "description": "MeetMas is an extension for Google Meets focused on professors productivity. It provides features such as participation tracking and participants polling",
     "version": "1.0",
     "permissions": ["storage", "activeTab", "scripting", "tabs", "bookmarks", "unlimitedStorage"],
     "background": {"service_worker": "background.js"},
     "content_scripts":[
         {
             "css": [],
-            "js": ["src/classes/Participation.js", "src/helperFunctions.js", "src/classes/Participant.js", "src/classes/Meet.js", "src/ManageStorage.js", "src/loadParticipationButtons.js", "src/extensionController.js", "src/meetController.js", "src/meetingsMenuController.js", "src/main.js"],
-            "matches": ["*://meet.google.com/*"], 
+            "js": [     
+                        "src/helperFunctions.js", "src/ManageStorage.js", "src/loadParticipationButtons.js", 
+                        "src/extensionController.js", "src/meetController.js", "src/meetingsMenuController.js", 
+                        "src/MeetMasMenuController.js", "src/messageMasController.js", "src/main.js",
+                        "src/MixerMas/MixerMas.js"
+                    ],
+            "matches": ["*://meet.google.com/*"] ,
+            "match_about_blank": true
+        },
+        {
+            "css": [],
+            "js": [     
+                        "src/helperFunctions.js", "src/MixerMas/MixerMas.js"
+                ],
+            "matches": ["*://*/*"], 
             "match_about_blank": true
         }
     ],
     "content_security_policy":{
       "extension_page": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
     },
-    "web_accessible_resources": [{
+    "web_accessible_resources": [
+        {
         "resources" :   ["src/participationButtons/participationButtons.html", "src/participationButtons/participationButtons.css",
                             "src/notifications/notification.html", "src/notifications/notification.css",
                             "src/Menus/selectMeeting.html", "src/Menus/menusCSS.css",
                             "src/Menus/selectMeeting_option.html", "src/edit.svg",  "edit.svg",
-                            "src/Menus/createMeet.html", "src/Menus/editMeetMenu.html"
+                            "src/Menus/createMeet.html", "src/Menus/editMeetMenu.html",
+                            "src/Menus/MeetMasMenu.html", 
+                            "src/messageMas/messageMas.html", "src/messageMas/messageMas.css",
+                            "src/MixerMas/MixerMas.html", "src/MixerMas/MixerMas.css", "src/MixerMas/MixerMas_dice.html", "src/MixerMas/MixerMas_RL.html", "src/MixerMas/MixerMas_RN.html",
+                            "src/MixerMas/images/face1.png", "src/MixerMas/images/face2.png", "src/MixerMas/images/face3.png", "src/MixerMas/images/face4.png" ,"src/MixerMas/images/face5.png", "src/MixerMas/images/face6.png",
+                            "HomePage"
                         ],
         "matches": ["*://meet.google.com/*"]
-    }],
+        },
+        {
+            "resources" :   [
+                                "src/MixerMas/MixerMas.html", "src/MixerMas/MixerMas.css", "src/MixerMas/MixerMas_dice.html", "src/MixerMas/MixerMas_RL.html", "src/MixerMas/MixerMas_RN.html",
+                                "src/MixerMas/images/face1.png", "src/MixerMas/images/face2.png", "src/MixerMas/images/face3.png", "src/MixerMas/images/face4.png" ,"src/MixerMas/images/face5.png", "src/MixerMas/images/face6.png" 
+                            ],
+            "matches": ["*://*/*"]
+        }
+    ],
     "icons": {
       "16": "MeetMas.png",
       "32": "MeetMas.png",

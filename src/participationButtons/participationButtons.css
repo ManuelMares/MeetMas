@@ -8,7 +8,6 @@
     min-width: 55px;
     height: 100%;
 
-    background-color: #e3e3e3;
     border-radius: 15px;
     padding: 2px;
 }
@@ -26,6 +25,7 @@
     font-weight: 500;
 }
     .MeetMas_Button_PositiveParticipation:hover{
+        cursor: pointer;
         background-color: rgb(53, 179, 53);
     }
     .MeetMas_Button_PositiveParticipation:active{
@@ -45,6 +45,7 @@
     font-weight: 500;
 }
     .MeetMas_Button_NegativeParticipation:hover{
+        cursor: pointer;
         background-color: rgb(54, 96, 168);
     }
     .MeetMas_Button_NegativeParticipation:active{

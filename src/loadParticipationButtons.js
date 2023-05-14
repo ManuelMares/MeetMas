@@ -4,7 +4,9 @@ This function add the participants in the menu that currently opened, and sets a
 async function loadParticipationButtons(){
   //add styles
   let cssParticipationButtons = await getCSS('src/participationButtons/participationButtons.css');
-  document.body.appendChild(cssParticipationButtons)
+  let cssMessageMas = await getCSS('src/messageMas/messageMas.css');
+  document.body.appendChild(cssParticipationButtons);
+  document.body.appendChild(cssMessageMas);
   
   //add buttons dynamically
   loadParticipants_ParticipationButtons();
@@ -14,17 +16,16 @@ async function loadParticipationButtons(){
 let participantsContainer_query = 'div[aria-label="Participants"]';
 let messagesContainer_query = 'div[jsname="xySENc"]';
 async function getParticipantsContainer(){
-  let participantsContainer = await waitForElm(participantsContainer_query);
+  let participantsContainer = await asyncQuery(participantsContainer_query);
   return participantsContainer;
 }
 async function getMessagesContainer(){
-  let messagesContainer = await waitForElm(messagesContainer_query);
+  let messagesContainer = await asyncQuery(messagesContainer_query);  
   return messagesContainer;
 }
 
 
 function appendHTMLNode(HTMLFather, HTMLChild){  
-  console.log("promise", HTMLFather, HTMLChild);
   return new Promise(async (resolve, reject) => {  
     HTMLFather.append(HTMLChild);
     await waitUntilElementIsAdded(HTMLFather, HTMLChild);
@@ -63,15 +64,17 @@ const checkForNewMembers = new MutationObserver(async entries => {
   checkForNewMembers.disconnect();
    //to avoid over rendering participation buttons, the mutator is deactivated for 2 seconds once that it is triggered.
    //it can be manually forced to re render the interface
-  await delay(2000)
+  await delay(1000)
 
   participantsContainer = await getParticipantsContainer();
   await addParticipationButton_Participants(participantsContainer);
+
+  await delay(2000)
   //await cleanButtons(participantsContainer);
   checkForNewMembers.observe(participantsContainer, {childList: true, subtree: true});
 })
 
-async function addParticipationButton_Participants(participantsContainer){ 
+async function addParticipationButton_Participants(participantsContainer){
   for (let index = 0; index < participantsContainer.childNodes.length; index++) {
     await addParticipationButton_Participant(participantsContainer.childNodes[index]);
   }
@@ -125,47 +128,69 @@ function addParticipant_CurrentMeet(participantId){
 
 
 //=========================================================================
-
 async function loadMessages_ParticipationButtons(){
   let messagesContainer = await getMessagesContainer();
   checkForNewMessages.observe(messagesContainer, {childList: true, subtree: true});
-  addParticipationButton_Messages(messagesContainer);
+  await addMessageMasButtons_messages(messagesContainer);
 }
 
 const checkForNewMessages = new MutationObserver(async entries => {
   checkForNewMembers.disconnect();
   //to avoid over rendering participation buttons, the mutator is deactivated for 2 seconds once that it is triggered.
   //it can be manually forced to re render the interface
-  await delay(2000)
+  await delay(1000)  
 
   let messagesContainer = await getMessagesContainer();
-  await addParticipationButton_Messages(messagesContainer);
+  await addMessageMasButtons_messages(messagesContainer)
+
+  await delay(2000)  
   checkForNewMembers.observe(participantsContainer, {childList: true, subtree: true});
 })
 
-async function addParticipationButton_Messages(messagesContainer){
-  messagesContainer.childNodes.forEach(async messageContainer =>{
-    await addParticipationButton_Message(messageContainer);
-  });
+async function addMessageMasButtons_messages(messagesContainer){
+  for (let index = 0; index < messagesContainer.childNodes.length; index++) {
+    let messageContainer = messagesContainer.childNodes[index];
+    await addMessageMasButtons(messageContainer);
+  }
 }
 
-async function addParticipationButton_Message(messageContainer){
-  let buttons = messageContainer.querySelector('#MeetMas_ButtonsContainer');
-  if(isValidHTML(buttons))
+async function addMessageMasButtons(messageContainer){
+  let buttonsContainer = messageContainer.querySelector('#MeetMas_messages_buttonsContainer');
+  if(isValidHTML(buttonsContainer))
     return
-    
+
+  await addButtonsContainer_Message(messageContainer);
+  await addMessageMasButtons_message(messageContainer);
+  await addParticipationButton_Message(messageContainer);
+
+}
+
+async function addButtonsContainer_Message(messageContainer){
+  messageContainer.setAttribute("class", "MeetMas_messages_buttonsContainer_Father");
+
+  let buttonsContainer = document.createElement("div");
+  buttonsContainer.setAttribute("class", "MeetMas_messages_buttonsContainer");
+  buttonsContainer.setAttribute("id", "MeetMas_messages_buttonsContainer");
+  messageContainer.childNodes[0].appendChild(buttonsContainer);
+  await delay(100);
+}
+
+
+async function addParticipationButton_Message(messageContainer){    
   //get id adn exclude youself from the list because the name is "you"
   let id= messageContainer.childNodes[0].childNodes[0].innerHTML;
   if(id.localeCompare("You") == 0)
     return
 
+  //create container for buttons
+  let buttonsContainer = messageContainer.querySelector("#MeetMas_messages_buttonsContainer");
+
 
   //add buttons
   var participationButtons = await createParticipationButtons();   
-  messageContainer.childNodes[0].appendChild(participationButtons);
+  buttonsContainer.appendChild(participationButtons);
     
   //add event listener
-  setEventListeners_Participant(participationButtons, id)
-  
+  setEventListeners_Participant(participationButtons, id)  
 }
 
