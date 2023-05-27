@@ -9,11 +9,17 @@ function populateMeetOptions(){
       for (let index = 0; index < meetings.length; index++) {
           addMeetOption(meetings[index]);            
       }
+      
+      //tutorial button
+      let tutorialButton = document.querySelector("#MeetMas_tutorialButton");
+      tutorialButton.addEventListener('click', () =>{
+        chrome.tabs.create({url : "HomePage.html"}); 
+      })
   });
+
 }
 
 async function addMeetOption(meet){
-  console.log(meet)
   let meetingsContainer = document.getElementById("MeetMas_MeetingsContainer");
 
 
@@ -28,7 +34,7 @@ async function addMeetOption(meet){
   
   //open
   let openButton = document.createElement('a');
-  openButton.innerHTML = "open";
+  openButton.innerHTML = "Open Meet";
   openButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_enterButton');
   meetOption.appendChild(openButton)
   openButton.addEventListener('click', (e) => {
@@ -36,16 +42,28 @@ async function addMeetOption(meet){
       openMeet(meet["meetLink"]);
   })
 
-  //report
+
+  //download report
   let reportButton = document.createElement('a');
-  reportButton.innerHTML = "download report";
+  reportButton.innerHTML = "Download";
   reportButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_enterButton');
   meetOption.appendChild(reportButton)
   reportButton.addEventListener('click', (e) => {
       e.stopPropagation();
-      //downloadReport(meet["meetLink"]);
+      downloadReport(meet["meetId"]);
   })
   
+  //open report in google sheets
+  // let sheetsButton = document.createElement('a');
+  // sheetsButton.innerHTML = "Open sheet";
+  // sheetsButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_enterButton');
+  // meetOption.appendChild(sheetsButton)
+  // sheetsButton.addEventListener('click', (e) => {
+  //     e.stopPropagation();
+  //     create("new file");
+  //     //downloadReport(meet["meetId"]);
+  // })
+
   //edit
   // let editButton = document.createElement('a');
   // editButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_optionButton'); 
@@ -58,7 +76,7 @@ async function addMeetOption(meet){
   
   //delete
   let deleteButton = document.createElement('a');
-  deleteButton.innerHTML = "delete";
+  deleteButton.innerHTML = "Delete";
   deleteButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_cancelButton');
   meetOption.appendChild(deleteButton)
   deleteButton.addEventListener('click', (e) => {
@@ -67,13 +85,6 @@ async function addMeetOption(meet){
   })
   
   meetingsContainer.appendChild(meetOption)
-
-
-  //tutorial button
-  let tutorialButton = document.querySelector("#MeetMas_tutorialButton");
-  tutorialButton.addEventListener('click', () =>{
-    chrome.tabs.create({url : "HomePage.html"}); 
-  })
 
 }
 
@@ -93,6 +104,13 @@ function reload(){
 
 
 
+async function downloadReport(meetId){
+  let meetCSV = null
+  await retrieveMeetFromStorage(meetId).then(meet => {
+    meetCSV = meetingToString(meet);
+    downloadParticipationCSV(meetCSV, meet);
+  })
+}
 
 
 
@@ -142,6 +160,17 @@ function isValidMeet(meetId){
 }
 
 
+function retrieveMeetFromStorage(id){  
+  return new Promise(resolve => {
+      chrome.storage.local.get(id, function(result){
+          let meetingsIds = Object.keys(result);  
+          return resolve(result[meetingsIds[0]]);
+      });
+  });
+}
+
+
+
 
 
 
@@ -163,4 +192,63 @@ function elementExists(query){
   if(!el)
     return false;
   return true;
+}
+
+
+function meetingToString(meeting){
+  console.log(meeting)
+  let answer = ""
+
+  
+  //add info
+  answer += "Meet Name,"     + meeting["meetName"] + ",\n";
+  answer += "Meet Link,"     + meeting["meetLink"] + ",\n";
+  answer += "Meet Id,"       + meeting["meetId"] + ",\n";
+  answer += "Creation Date," + meeting["metaData"]["creationDate"] + ",\n";
+  answer += "Total Dates,"   + meeting["metaData"]["totalDates"] + ",\n";
+  answer += "\n"
+
+  //Dates row
+  answer += ["Dates,"]
+  for (let index = 0; index < meeting["dates"].length; index++) {
+    answer += meeting["dates"][index] +",";
+  }
+  answer += "Total Participations\n";
+  
+
+  //Participants
+  let participants =  Object.keys(meeting["participants"])
+  for (let participantIndex = 0; participantIndex < participants.length; participantIndex++) {
+    let totalParticipationsPerParticipant = 0
+    let participantName = participants[participantIndex]
+    let dates = Object.keys(meeting["participants"][participantName])
+    
+    answer += participantName + ",";
+    for (let dateIndex = 0; dateIndex < dates.length; dateIndex++) {
+      let date = String(dates[dateIndex]);
+      let participationValue = meeting["participants"][participantName][date]
+      answer += participationValue + ",";    
+      totalParticipationsPerParticipant += Number(participationValue)
+    }
+    answer += totalParticipationsPerParticipant + "\n"
+  }
+  
+  return answer;
+}
+
+
+
+function downloadParticipationCSV(csv, meeting){
+  let csvContent = csv;
+  let docTitle = meeting["meetName"] + ".csv";
+
+  var encodedUri = "data:text/csv;charset=utf-8,%EF%BB%BF" + encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("id", "MeetMasDownloadLink " + meeting["meetName"]);
+  link.setAttribute("download", docTitle);
+  document.body.appendChild(link); // Required for FF
+  
+  link.click();
+  removeHTMLNode("#MeetMasDownloadLink " + meeting["meetName"])
 }

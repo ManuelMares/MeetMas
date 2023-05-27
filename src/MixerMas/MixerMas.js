@@ -30,7 +30,7 @@ function addEventListers(){
         randomNumberHandler ();
     })
     let mixMaxRandomLetter = document.getElementById("mixermas_randomLetterButton")
-    createToolTip("Get a random letter", mixMaxRandomLetter, "mixermas_randomLetterButton");
+    createToolTip("Get a random word", mixMaxRandomLetter, "mixermas_randomLetterButton");
     mixMaxRandomLetter.addEventListener("click", () => {
         randomLetterHandler();
     })

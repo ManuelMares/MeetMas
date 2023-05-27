@@ -64,7 +64,7 @@ const checkForNewMembers = new MutationObserver(async entries => {
   checkForNewMembers.disconnect();
    //to avoid over rendering participation buttons, the mutator is deactivated for 2 seconds once that it is triggered.
    //it can be manually forced to re render the interface
-  await delay(1000)
+  await delay(2000)
 
   participantsContainer = await getParticipantsContainer();
   await addParticipationButton_Participants(participantsContainer);
@@ -112,13 +112,17 @@ function addParticipant_CurrentMeet(participantId){
   let participants = currentMeet["participants"];
 
   //if participant don't exists yet, add them
-  if(!participants.hasOwnProperty(participantId))
+  if(!participants.hasOwnProperty(participantId)){
     currentMeet["participants"][participantId] = {};
+    currentMeet["metaData"]["totalParticipants"] += 1
+  }
 
   //then, if today's date has not been registered, add it
   let todayDate = getDate_YYYYMMDD();
-  if(!currentMeet["participants"][participantId].hasOwnProperty(todayDate))
+  if(!currentMeet["participants"][participantId].hasOwnProperty(todayDate)){
     currentMeet["participants"][participantId][todayDate] = 0;
+    currentMeet["metaData"]["totalDates"] += 1
+  }
 }
 
 

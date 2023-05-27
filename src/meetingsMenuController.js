@@ -165,7 +165,7 @@ function loadMeet(meetId){
             return false
             
         currentMeet = ans;
-        currentMeet["dates"] += getDate_YYYYMMDD();
+        currentMeet["dates"].push(getDate_YYYYMMDD());
         return true;
     })
     .then((gotMeet) => {
