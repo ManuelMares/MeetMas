@@ -46,9 +46,8 @@ Creates the MeetingsMenu container
 */
 async function display_SelectAMeeting_Menu(){
     var selectMeeting_Container = document.createElement('div');
-    selectMeeting_Container.innerHTML = await getTextContent('src/Menus/selectMeeting.html');
-    selectMeeting_Container.appendChild( await getCSS('src/Menus/menusCSS.css') );   
-    // selectMeeting_Container.innerHTML = await getTextContent('src/Menus/menusCSS.css');
+    selectMeeting_Container.innerHTML = await getTextContent('src/MeetMas/SelectMeeting/selectMeeting.html');
+    selectMeeting_Container.appendChild( await getCSS('src/MeetMas/SelectMeeting/menusCSS.css') );   
     document.body.appendChild(selectMeeting_Container)
     
     //create new meeting button
@@ -159,12 +158,14 @@ Given an meetId, fetches the meet from the storage.
 After this function is triggered, the control is transfered to registerParticipations.js
 */
 function loadMeet(meetId){
+    let tempMeet
     retrieveMeetFromStorage(meetId)
     .then(ans=>{
         if(!checkValidJSON(ans))
             return false
             
         currentMeet = ans;
+        tempMeet = ans
         currentMeet["dates"].push(getDate_YYYYMMDD());
         return true;
     })
@@ -172,8 +173,11 @@ function loadMeet(meetId){
         if(gotMeet){
             close_MeetingsMenu();
             startRegistering();
-            notify("meet " + meetId + " has been selected", meetId);
+            notify("meet " + tempMeet["meetName"] + " has been selected", tempMeet["meetName"]);
         }        
+    })
+    .then(() => {
+        load_interfaceButtons();
     })
 }
 
@@ -203,7 +207,7 @@ This function renders the menu for creating a new meeting, as well as creating t
 async function display_editMeetingMenu(meetToEdit){
     //load HTML
     var selectMeeting_Container = document.createElement('div');
-    selectMeeting_Container.innerHTML = await getTextContent('src/Menus/editMeetMenu.html');
+    selectMeeting_Container.innerHTML = await getTextContent('src/MeetMas/SelectMeeting/editMeetMenu.html');
     document.body.appendChild(selectMeeting_Container)    
 
     //Get variables from the editMeetingMenu
@@ -285,7 +289,7 @@ This function renders the menu for creating a new meeting, as well as creating t
 async function display_createMeetingMenu(){
     //load HTML
     var selectMeeting_Container = document.createElement('div');
-    selectMeeting_Container.innerHTML = await getTextContent('src/Menus/createMeet.html');
+    selectMeeting_Container.innerHTML = await getTextContent('src/MeetMas/SelectMeeting/createMeetMenu.html');
     document.body.appendChild(selectMeeting_Container)    
 
     //Get variables from the createMeetingMenu

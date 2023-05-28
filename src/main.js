@@ -23,13 +23,6 @@ The structure to create a new meet JSON object is as follows:
 */
 
 
-//TODO:
-/*
-Automatic messaging system.
-Send a message everytime somebody joins
-Send a message requesting participation to the user
-respond messages system
-*/
 
 
 let meetMasId = "peeeelfbdfnbnefepkclgfgbmfnnnpki";
@@ -38,6 +31,7 @@ let membersButton = null;
 let menu = null;
 let membersMenu = null;
 let chatMenu = null;
+let interfaceLoaded = false;
 
 
 

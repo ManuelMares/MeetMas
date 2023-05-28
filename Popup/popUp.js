@@ -13,7 +13,7 @@ function populateMeetOptions(){
       //tutorial button
       let tutorialButton = document.querySelector("#MeetMas_tutorialButton");
       tutorialButton.addEventListener('click', () =>{
-        chrome.tabs.create({url : "HomePage.html"}); 
+        chrome.tabs.create({url : "HomePage/HomePage.html"}); 
       })
   });
 
@@ -94,7 +94,7 @@ function openMeet(meetLink){
 
 
 function editMeet(meetId){
-  //todo: do at the ends
+  //todo: do at the end
 }
 
 function reload(){

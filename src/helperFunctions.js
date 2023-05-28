@@ -93,7 +93,6 @@ return fetch(chrome.runtime.getURL(dir))
 }
 
 //usage: selectMeeting_Container.appendChild( await getCSS('src/Menus/menusCSS.css') );   
-
 async function getCSS(cssDir){
 var style = document.createElement( 'style' );
 style.innerHTML = await getTextContent(cssDir);
@@ -283,3 +282,5 @@ function downloadParticipationReport(meeting){
     }
   );
 
+
+  

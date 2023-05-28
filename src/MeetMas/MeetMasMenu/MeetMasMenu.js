@@ -1,59 +1,7 @@
-/* 
-This script loads the MeetMas menu.
-It shows a list of all the members that have ever joined the meet, as long as they have been registered properly
-To register them, it is enough to display the regular list of participants provided within the meet itself
-Additionally, a updateList button is provided to simplify this task.
 
-From this menu, it is possible to poll students in order to request participations, as well as registering the participation
-
-
-*/
-async function displayMeetMasMenu(){
-
-    clearMeetMasMenu();
-
-    await prepareContainerForMeetMasMenu();
-    let meetMasMenu = await asyncQuery("div[jsname='ME4pNd']");
-    await createMeetMasMenu(meetMasMenu);
-    //add participants
-    await addParticipantsToMeetMasMenu();
-
-
-    //Event Listeners
-    let detailsButton = document.querySelector("button[aria-label='Meeting details']");
-    let CloseButton = document.getElementById("meetMasMenu_CloseButton");
-    CloseButton.addEventListener("click", e => {
-        detailsButton.click();    
-    })
-    let updateListButton = document.getElementById("MeetMas_meetMasMenu_updateListButton");
-    updateListButton.addEventListener("click", async e => {
-        membersButton.click();
-        notify("Updating list of participants, please wait...")
-        await delay(2500);
-        displayMeetMasMenu();    
-    })
-    let randomParticipantButton = document.getElementById("MeetMas_meetMasMenu_randomParticipantButton");
-    randomParticipantButton.addEventListener("click", e => {
-        let participant = selectRandomParticipant(currentMeet["participants"]);
-        Message("Random participant: " + participant);
-    })
-    let randomParticipantButton_Smart = document.getElementById("MeetMas_meetMasMenu_randomeParticipantButton_Smart");
-    randomParticipantButton_Smart.addEventListener("click", e => {
-        let participant = selectRandomParticipantSMart(currentMeet["participants"]);
-        Message("(Smart) Random participant: " + participant);
-    })
-}
 
 async function clearMeetMasMenu(){
     removeHTMLNode("#meetMasMenu_container");
-    // if (elementExists("#meetMasMenu_container")){
-    //     let a = document.getElementById("meetMasMenu_container");
-    //     a.innerHTML = ""
-    //     // removeHTMLNode("#MeetMas_meetMasMenu_updateListButton")
-    //     // removeHTMLNode("#MeetMas_meetMasMenu_randomParticipantButton")
-    //     // removeHTMLNode("#MeetMas_meetMasMenu_randomeParticipantButton_Smart")
-    //     // removeHTMLNode("#MeetMas_meetMasMenu_Participants")
-    // }
 }
 
 async function addParticipantsToMeetMasMenu(){
@@ -101,19 +49,21 @@ async function createMeetMasMenu(meetMasMenu){
     container.setAttribute("class", "MeetMas_meetMasMenu_container");
     container.setAttribute("id", "meetMasMenu_container");
     
-    let MeetMasMenuContent = await getTextContent('src/Menus/MeetMasMenu.html');
+    let MeetMasMenuContent = await getTextContent('src/MeetMas/MeetMasMenu/MeetMasMenu.html');
     container.innerHTML +=  MeetMasMenuContent;
 
     meetMasMenu.appendChild(container);
     //create tooltips
     let updateListButton = document.getElementById("MeetMas_meetMasMenu_updateListButton");
-    createToolTip("Get new members currently in the meet", updateListButton,   "updateListButton");
+    createToolTip("Get new members currently in the meet and update the selected meet", updateListButton,   "updateListButton");
 
     let randomParticipantButton = document.getElementById("MeetMas_meetMasMenu_randomParticipantButton");
     createToolTip("Poll a random participant", randomParticipantButton, "randomParticipantButton");
 
     let randomeParticipantButton_Smart = document.getElementById("MeetMas_meetMasMenu_randomeParticipantButton_Smart");
     createToolTip("Chose randomly from the people with least participations", randomeParticipantButton_Smart, "randomeParticipantButton_Smart");
+
+    document.getElementById("MeetMas_headerTitle_content").innerHTML = currentMeet["meetName"];
 } 
 
 async function prepareContainerForMeetMasMenu(){

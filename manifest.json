@@ -9,9 +9,10 @@
         {
             "css": [],
             "js": [     
-                        "src/helperFunctions.js", "src/ManageStorage.js", "src/loadParticipationButtons.js", 
-                        "src/extensionController.js", "src/meetController.js", "src/meetingsMenuController.js", 
-                        "src/MeetMasMenuController.js", "src/messageMasController.js", "src/main.js",
+                        "src/helperFunctions.js", "src/ManageStorage.js", "src/MeetMas/ParticipationButtons/ParticipationButtons.js", 
+                        "src/extensionController.js", "src/MeetMas/SelectMeeting/selectMeeting.js", 
+                        "src/MeetMas/InterfaceButtons/InterfaceButtons.js",
+                        "src/MeetMas/MeetMasMenu/MeetMasMenu.js", "src/messageMas/messageMasController.js", "src/main.js",
                         "src/MixerMas/MixerMas.js"
                     ],
             "matches": ["*://meet.google.com/*"] ,
@@ -31,16 +32,18 @@
     },
     "web_accessible_resources": [
         {
-        "resources" :   ["src/participationButtons/participationButtons.html", "src/participationButtons/participationButtons.css",
+        "resources" :   [   
+                            "src/MeetMas/participationButtons/participationButtons.html", "src/MeetMas/participationButtons/participationButtons.css",
                             "src/notifications/notification.html", "src/notifications/notification.css",
-                            "src/Menus/selectMeeting.html", "src/Menus/menusCSS.css",
+                            "src/MeetMas/SelectMeeting/selectMeeting.html", "src/MeetMas/SelectMeeting/menusCSS.css", "src/MeetMas/SelectMeeting/createMeetMenu.html", "src/MeetMas/SelectMeeting/editMeetMenu.html",
                             "src/Menus/selectMeeting_option.html", "src/edit.svg",  "edit.svg",
-                            "src/Menus/createMeet.html", "src/Menus/editMeetMenu.html",
-                            "src/Menus/MeetMasMenu.html", 
+                            "src/MeetMas/MeetMasMenu/MeetMasMenu.html", 
                             "src/messageMas/messageMas.html", "src/messageMas/messageMas.css",
                             "src/MixerMas/MixerMas.html", "src/MixerMas/MixerMas.css", "src/MixerMas/MixerMas_dice.html", "src/MixerMas/MixerMas_RL.html", "src/MixerMas/MixerMas_RN.html",
                             "src/MixerMas/images/face1.png", "src/MixerMas/images/face2.png", "src/MixerMas/images/face3.png", "src/MixerMas/images/face4.png" ,"src/MixerMas/images/face5.png", "src/MixerMas/images/face6.png",
-                            "HomePage"
+                            "src/MeetMas/InterfaceButtons/InterfaceButtons.html", "src/MeetMas/InterfaceButtons/InterfaceButtons.css",
+                            "HomePage/pin_meet_mas.png",
+                            "HomePage/HomePage.html"
                         ],
         "matches": ["*://meet.google.com/*"]
         },
@@ -60,7 +63,7 @@
       "128": "MeetMas.png"
     },  
     "action": {
-        "default_popup": "popUp.html",
+        "default_popup": "Popup/popUp.html",
         "default_title": "MeetMas",
         "default_icon": {
             "16": "MeetMas.png",

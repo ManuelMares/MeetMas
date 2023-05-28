@@ -121,14 +121,19 @@
     height:10%;
     display: flex;
 }
+.MeetMas_headerTitle_content{
+    overflow-y: scroll;
+    height: 40px;
+    line-height: 40px;
+}
 .MeetMas_headerTitle{      
     width: calc(100% - 40px);
     display: flex;
     align-items: center;
     justify-content: start;
     font-size: 25px;
-    overflow: hidden;
     padding: 0 35px;
+    height: 40px;
 }
 
 
@@ -233,25 +238,6 @@
     }
 
 
-.MeetMas_InterfaceButton{
-    width: auto;
-    height: auto;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    padding: 10px;
-    font-weight: 600;
-    margin: 10px 5px;
-    background-color: var(--MeetMas-grey);
-}
-    .MeetMas_InterfaceButton:hover{
-        cursor: pointer;
-        background-color: var(--MeetMas-grey-hover);
-    }
-    .MeetMas_InterfaceButton:active{
-        background-color: var(--MeetMas-grey-active);
-    }
-
 .MeetMas_ReplyButton{
     height: auto;
     color: var(--MeetMas-yellow);
@@ -355,42 +341,6 @@
 
 
 
-
-
-
-.interfaceButtonContainer{
-    height: auto;
-    width: auto;
-    position: fixed;
-    z-index: 500;
-    top: 10px;
-    left: 10px;
-    background-color: #11111152;
-    border-radius: 5px;
-    color: white;
-    gap: 10px;
-    display: flex;
-    padding-right: 10px;
-}
-
-.MeetMas_InterfaceButton_hide{
-    width: auto;
-    height: 60px;
-    border-radius: 5px 0 0 5px;
-    border: none;
-    color: white;
-    padding: 10px;
-    font-weight: 600;
-    background-color: var(--MeetMas-black);
-}
-    .MeetMas_InterfaceButton_hide:hover{
-        cursor: pointer;
-        background-color: var(--MeetMas-black-hover);
-    }
-    .MeetMas_InterfaceButton_hide:active{
-        background-color: var(--MeetMas-black-active);
-    }
-    
 
 
 
