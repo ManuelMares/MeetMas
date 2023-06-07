@@ -13,6 +13,8 @@
                         "src/extensionController.js", "src/MeetMas/SelectMeeting/selectMeeting.js", 
                         "src/MeetMas/InterfaceButtons/InterfaceButtons.js",
                         "src/MeetMas/MeetMasMenu/MeetMasMenu.js", "src/messageMas/messageMasController.js", "src/main.js",
+                        "src/MixerMas/MixerMas.js",
+                        
                         "src/MixerMas/MixerMas.js"
                     ],
             "matches": ["*://meet.google.com/*"] ,
@@ -43,7 +45,10 @@
                             "src/MixerMas/images/face1.png", "src/MixerMas/images/face2.png", "src/MixerMas/images/face3.png", "src/MixerMas/images/face4.png" ,"src/MixerMas/images/face5.png", "src/MixerMas/images/face6.png",
                             "src/MeetMas/InterfaceButtons/InterfaceButtons.html", "src/MeetMas/InterfaceButtons/InterfaceButtons.css",
                             "HomePage/pin_meet_mas.png",
-                            "HomePage/HomePage.html"
+                            "HomePage/HomePage.html",
+                            
+                            "src/MixerMas/MixerMas.html", "src/MixerMas/MixerMas.css", "src/MixerMas/MixerMas_dice.html", "src/MixerMas/MixerMas_RL.html", "src/MixerMas/MixerMas_RN.html",
+                            "src/MixerMas/images/face1.png", "src/MixerMas/images/face2.png", "src/MixerMas/images/face3.png", "src/MixerMas/images/face4.png" ,"src/MixerMas/images/face5.png", "src/MixerMas/images/face6.png" 
                         ],
         "matches": ["*://meet.google.com/*"]
         },

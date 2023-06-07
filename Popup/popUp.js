@@ -1,24 +1,71 @@
-
+/*
+This script controls the popup menu form the extension.
+*/
+//==================================================================================================================================
+//GLOBAL VARIABLES
+//==================================================================================================================================
 let meetMasId = "peeeelfbdfnbnefepkclgfgbmfnnnpki";
-populateMeetOptions();
 
 
+
+//==================================================================================================================================
+//START METHODS
+//==================================================================================================================================
+main();
+
+/* 
+Triggers all the functionallity in the popup menu
+*/
+function main(){
+  populateMeetOptions();
+  enableUploadButton();
+}
+
+/* 
+Loads the event listener for the upload button for participation files in the popup
+*/
+function enableUploadButton(){
+  document.getElementById("MeetMas_uploadFile_submitButton").addEventListener('click', () => {
+    uploadMeet();
+  })
+}
+
+/* 
+Loads all the meets in the popup from storage
+*/
 function populateMeetOptions(){
   retrieveMeetings()
   .then(async meetings => {
+      if(meetings.length == 0)
+        return
+      
+      let meetingsContainer = document.getElementById("MeetMas_MeetingsContainer");
+      meetingsContainer.innerHTML  = "";
       for (let index = 0; index < meetings.length; index++) {
           addMeetOption(meetings[index]);            
       }
       
-      //tutorial button
-      let tutorialButton = document.querySelector("#MeetMas_tutorialButton");
-      tutorialButton.addEventListener('click', () =>{
-        chrome.tabs.create({url : "HomePage/HomePage.html"}); 
-      })
-  });
-
+      enableHomeButton();
+  })
 }
 
+/* 
+ Creates a new tab displaying the hamePage.html file
+*/
+function enableHomeButton(){
+  let tutorialButton = document.querySelector("#MeetMas_tutorialButton");
+  tutorialButton.addEventListener('click', () =>{
+    chrome.tabs.create({url : "HomePage/HomePage.html"}); 
+  })
+}
+
+//==================================================================================================================================
+//MEET CONTROLS
+//==================================================================================================================================
+
+/* 
+Loads all the meets in the popup
+*/
 async function addMeetOption(meet){
   let meetingsContainer = document.getElementById("MeetMas_MeetingsContainer");
 
@@ -26,32 +73,10 @@ async function addMeetOption(meet){
   let meetOption = document.createElement("div");
   meetOption.setAttribute("class", "MeetMas_MeetOption");
 
-  //title
-  let title = document.createElement('p');
-  title.innerHTML = meet["meetName"];
-  title.setAttribute("class", 'MeetMas_MeetOption_title');
-  meetOption.appendChild(title)
-  
-  //open
-  let openButton = document.createElement('a');
-  openButton.innerHTML = "Open Meet";
-  openButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_enterButton');
-  meetOption.appendChild(openButton)
-  openButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openMeet(meet["meetLink"]);
-  })
-
-
-  //download report
-  let reportButton = document.createElement('a');
-  reportButton.innerHTML = "Download";
-  reportButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_enterButton');
-  meetOption.appendChild(reportButton)
-  reportButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      downloadReport(meet["meetId"]);
-  })
+  loadMeetOption_title(meetOption, meet);
+  loadMeetOption_open(meetOption, meet);
+  loadMeetOption_download(meetOption, meet);
+  loadMeetOption_delete(meetOption, meet);
   
   //open report in google sheets
   // let sheetsButton = document.createElement('a');
@@ -74,35 +99,85 @@ async function addMeetOption(meet){
   //     editMeet(meet["meetId"]);
   // })
   
-  //delete
+  
+  meetingsContainer.appendChild(meetOption)
+}
+
+
+
+//TITTLE======================================================================
+/* 
+Loads the title for for a given meet
+*/
+function loadMeetOption_title(meetOption, meet){
+  let title = document.createElement('p');
+  title.innerHTML = meet["meetName"];
+  title.setAttribute("class", 'MeetMas_MeetOption_title');
+  meetOption.appendChild(title)
+}
+
+//OPEN BUTTON======================================================================
+/* 
+Loads the open button for for a given meet
+*/
+function loadMeetOption_open(meetOption, meet){
+  let openButton = document.createElement('a');
+  openButton.innerHTML = "Open Meet";
+  openButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_enterButton');
+  meetOption.appendChild(openButton)
+  openButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openMeet(meet["meetLink"]);
+  })
+}
+
+/* 
+Opens the meet link in a new tab
+*/
+function openMeet(meetLink){
+  window.open(meetLink, '_blank').focus();
+}
+
+
+
+
+//DELETE BUTTON======================================================================
+/* 
+Loads the delete button for for a given meet
+*/
+function loadMeetOption_delete(meetOption, meet){
   let deleteButton = document.createElement('a');
   deleteButton.innerHTML = "Delete";
   deleteButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_cancelButton');
   meetOption.appendChild(deleteButton)
   deleteButton.addEventListener('click', (e) => {
       e.stopPropagation();
-      removeMeet(meet["meetId"]);
+      removeMeet(meet["meetId"]).then(() => {        
+        reload();
+      })
   })
+}
+
+
+
+
+
+
+//DOWNLOAD BUTTON======================================================================
+/* 
+Loads the download button for for a given meet
+*/
+function loadMeetOption_download(meetOption, meet){
+  let reportButton = document.createElement('a');
+  reportButton.innerHTML = "Download";
+  reportButton.setAttribute("class", 'MeetMas_MeetOption_button MeetMas_enterButton');
+  meetOption.appendChild(reportButton)
   
-  meetingsContainer.appendChild(meetOption)
-
+  reportButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    downloadReport(meet["meetId"]);
+  })
 }
-
-function openMeet(meetLink){
-  window.open(meetLink, '_blank').focus();
-}
-
-
-function editMeet(meetId){
-  //todo: do at the end
-}
-
-function reload(){
-  document.querySelector("#MeetMas_MeetingsContainer").innerHTML = "";
-  populateMeetOptions();
-}
-
-
 
 async function downloadReport(meetId){
   let meetCSV = null
@@ -113,7 +188,177 @@ async function downloadReport(meetId){
 }
 
 
+function reload(){
+  document.querySelector("#MeetMas_MeetingsContainer").innerHTML = "";
+  populateMeetOptions();
+}
 
+
+
+
+
+
+function uploadMeet(){
+  let file = document.getElementById("MeetMas_uploadFile").files[0];
+  
+  if(!file){
+    displayErrorMessage("Invalid file");
+    return;
+  }
+
+  if(file["type"].localeCompare("text/csv") != 0){
+    displayErrorMessage("File must be csv type");
+    return;
+  }
+
+  // let csvArray = getCSVArray(file);
+  getCSVArray(file);
+  
+  // if(csvArray.length == 0){
+  //   displayErrorMessage("The given file is empty");
+  //   return;
+  // }
+
+  // meet = {
+  //   meetId: "",
+  //   meetName: "",
+  //   meetLink: "",
+  //   metaData: {
+  //       creationDate:"",
+  //       totalDates:"",
+  //       totalParticipants:"",
+  //   },
+  //   Dates: [d1,d2,d3,],
+  //   participants:
+  //   {
+  //       p1: {d1:t1, d2:t2 },
+  //       p2: {d1:t1, d2:t2 }
+  //   }
+  // }
+
+  // meet = {
+  //   meetId: "",
+  //   meetName: "",
+  //   meetLink: "",
+  //   metaData: {
+  //       creationDate:"",
+  //       totalDates:"",
+  //       totalParticipants:"",
+  //   },
+  //   dates: [d1,d2,d3,],
+  //   participants:
+  //   {
+  //       p1: {d1:t1, d2:t2 },
+  //       p2: {d1:t1, d2:t2 }
+  //   }
+  // }
+  // try {
+    
+    
+  // } catch (error) {
+    
+  // }
+  
+}
+
+function getCSVArray(file){
+  
+  meet = {
+    meetId: "",
+    meetName: "",
+    meetLink: "",
+    metaData: {
+        creationDate:"",
+        totalDates:"",
+        totalParticipants:"",
+    },
+    dates: [], //d1,d2,d3
+    participants:
+    {
+        //p1: {d1:t1, d2:t2 },
+        //p2: {d1:t1, d2:t2 }
+    }
+  }
+  
+  let reader = new FileReader();
+  let csvArray;
+  reader.addEventListener('load', function (e) {
+    let csvString = e.target.result; 
+    const regex = new RegExp(",*", "g")
+    csvString = csvString.replaceAll(/\r/g, ',');
+    csvString = csvString.replaceAll(/,+/g, ',');
+    csvArray = csvString.split("\n");
+    // console.log(tempArray)
+    cvsToMeet(meet, csvArray);
+    createMeet(meet).then(meetWasCreated => {
+      if(!meetWasCreated)
+        displayErrorMessage("File name already exists. Please change 'Meet Name' inside the cvs file");
+      else
+        displayErrorMessage("");
+     })
+      
+  });
+  reader.readAsBinaryString(file);
+
+
+}
+
+
+function cvsToMeet(meet, array){
+  //data an meta data
+  meet["meetName"] =  array[0].substring(13, array[0].length - 1);
+  meet["meetLink"] =  array[1].substring(10, array[1].length - 1);
+  meet["meetId"] =  array[2].substring(8, array[2].length - 1);
+  meet["metaData"]["creationDate"] =  array[3].substring(14, array[3].length - 1);
+  // meet["metaData"]["totalDates"] =  Number(array[4].substring(12, array[4].length - 1));
+  
+  //dates array
+  meet["dates"] = [];
+  let datesArray =  array[6].substring(6, array[6].length - 21).split(",");
+  for (let index = 0; index < datesArray.length; index++) {
+    if(datesArray[index].localeCompare("") != 0)
+    meet["dates"].push(datesArray[index])    
+  }
+  meet["metaData"]["totalDates"] =  Number(meet["dates"].length);
+  
+  //index 8 is the first participant
+  //add participants with dates
+  //p: {date: value, date2: value2}
+  let numDates = meet["dates"].length
+  for (let pIndex = 7; pIndex < array.length -1; pIndex++) {
+    let participant = array[pIndex].split(",");
+    if(participant[participant.length - 1].localeCompare("") == 0)
+      participant.pop()
+    
+    //key = name
+    let pName = "";
+    for (let nIndex = 0; nIndex < participant.length - numDates - 1; nIndex++) {
+      pName += participant[nIndex];
+    }
+
+    
+
+    //value: [ {date:value} ]
+    meet["participants"][pName] = {};
+    let counterDate = 0
+    for (let dateIndex = participant.length - numDates - 1; dateIndex < participant.length -1; dateIndex++) {
+      meet["participants"][pName][meet["dates"][counterDate]] = participant[dateIndex];
+      counterDate ++;
+    }
+        
+  }
+  
+  // console.log(meet)
+  //return meet;
+}
+
+
+
+function displayErrorMessage(message){
+  let text = document.getElementById("MeetMas_uplodFile_errorMessage");
+  text.innerHTML = message
+
+}
 
 
 
@@ -142,7 +387,6 @@ function retrieveMeetings(){
 function removeMeet(id){
   return new Promise(resolve => {
       chrome.storage.local.remove([id],function(result){
-          reload();
           return resolve();
       })
   });
@@ -170,8 +414,82 @@ function retrieveMeetFromStorage(id){
 }
 
 
+function createMeet(meet){ 
+  return new Promise(resolve => {
+    console.log("receiving name: " , meet["meetName"])
+      // if(meetExists(meet["meetName"])){
+      //   console.log("Id already exists!")
+      //   // return resolve(false)
+      // }
+      meetNameExists(meet["meetName"]).then(nameIsTaken => {
+        console.log("======================", nameIsTaken)
+        if(nameIsTaken){
+          console.log("repeated name!")
+          return resolve(false)
+        }
+        let newMeet = {};
+        meet["meetId"] =  getRandomId();
+        newMeet[meet["meetId"]] = meet;       
+        chrome.storage.local.set(newMeet, function(result){
+            return resolve(true)
+        });
+      }).then(() => {        
+        reload();
+      })
+  });
+}
 
 
+/*
+Checks if the 
+@param name
+    The name of the meeting to search, not the id
+@return 
+    A boolean value indicating if the name has been already registered
+*/
+function meetNameExists(name){
+  return new Promise(resolve => {
+      chrome.storage.local.get(null, function(result){ 
+          console.log("===================================")
+          console.log("result: ", result)
+          if(!checkValidJSON(result))
+              return resolve(false)
+                                
+          let meetingsIds = Object.keys(result);   
+          //check only for meets that match the 
+          for (let index = 0; index < meetingsIds.length; index++) {
+              console.log(result[meetingsIds[index]]["meetName"], name) 
+              if(isValidMeet(meetingsIds[index])  && result[meetingsIds[index]]["meetName"].localeCompare(name) == 0)
+                return resolve(true)
+          }
+          return resolve(false);
+      });
+  });
+}
+
+/*
+Checks if the 
+@param name
+    The name of the meeting to search, not the id
+@return 
+    A boolean value indicating if the name has been already registered
+*/
+function meetExists(name){
+  return new Promise(resolve => {
+      chrome.storage.local.get(null, function(result){ 
+          if(!checkValidJSON(result))
+              return resolve(false)
+                                
+          let meetingsIds = Object.keys(result);   
+          //check only for meets that match the 
+          for (let index = 0; index < meetingsIds.length; index++) {
+              if(isValidMeet(meetingsIds[index])  && result[meetingsIds[index]]["meetName"].localeCompare(name) == 0)
+                  return resolve(true)
+          }
+          return resolve(false);
+      });
+  });
+}
 
 
 //helper==================================================================================
@@ -251,4 +569,8 @@ function downloadParticipationCSV(csv, meeting){
   
   link.click();
   removeHTMLNode("#MeetMasDownloadLink " + meeting["meetName"])
+}
+
+function getRandomId(){
+  return ("MeetMas" + Date.now().toString(16) + Math.random().toString(16)).replace(".","")
 }

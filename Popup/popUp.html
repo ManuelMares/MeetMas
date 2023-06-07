@@ -12,13 +12,25 @@
             Meet Mas Main Menu
         </header>
 
-        <section>
+        <section class="MeetMas_meetingsList">
             <div class="MeetMas_MeetingsContainer" id="MeetMas_MeetingsContainer">
+                No participation file has been created yet. <br>
+                Open new Google Meet and create a new participation file in the 'Meetings' initial menu.<br>
+                Alternatively, load an existing participation file in the section below.
+            </div>
+        </section>
 
+        <section class="MeetMas_uploadFileContainer">
+            <label class="MeetMas_uplodFile_description" id="MeetMas_uplodFile_description">Upload a csv participation file. A new Id will be assigned, but the name will not be changed.</label>
+            <label class="MeetMas_uplodFile_errorMessage" id="MeetMas_uplodFile_errorMessage"></label>
+            <div class="MeetMas_uploadFile_body">
+                <input class="MeetMas_uploadFile" id="MeetMas_uploadFile" type="file"/>
+                <button class="MeetMas_uploadFile_submitButton" id="MeetMas_uploadFile_submitButton">Upload</button>
             </div>
         </section>
 
         <footer>
+
             <div class="MeetMas_information">
                 Want to know more?
                 check Meet Mas' <a href="" id="MeetMas_tutorialButton">home page!</a>

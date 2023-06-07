@@ -16,6 +16,7 @@ async function load_interfaceButtons(){
     createToolTip("Problems with the participation buttons? Try reloading them (ctrl + a)", reloadExtensionButton, "reloadExtensionButton");
     createToolTip("Select a new file where to register participations",                     meetingsMenuButton, "meetingsMenuButton");
     
+    
     let isHidden = false;
     hideInterfaceMenuButton.addEventListener("click", (e) =>{
         isHidden = controlHiddenStatus(isHidden);
@@ -23,14 +24,20 @@ async function load_interfaceButtons(){
     meetingsMenuButton.addEventListener("click", (e) =>{
         load_MeetingsMenu();
     })  
-    reloadExtensionButton.addEventListener("click", (e) =>{    
-        forceReload();
+    reloadExtensionButton.addEventListener("click", (e) =>{   
+        if(checkValidJSON(currentMeet))
+            forceReload();
+        else
+            notify("To use this function, please select a meeting");
     })  
-    tutorialButton.addEventListener("click", (e) =>{    
-        openHomePage();
+    tutorialButton.addEventListener("click", (e) =>{  
+        openHomePage(); 
     })  
-    meetMasMenuButton.addEventListener("click", (e) =>{    
-        displayMeetMasMenu();
+    meetMasMenuButton.addEventListener("click", (e) =>{   
+        if(checkValidJSON(currentMeet))
+            displayMeetMasMenu();
+        else
+            notify("To use this function, please select a meeting") ;
     })
   
 }

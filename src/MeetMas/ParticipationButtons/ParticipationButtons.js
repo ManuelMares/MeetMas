@@ -148,11 +148,12 @@ function addParticipant_CurrentMeet(participantId){
     currentMeet["metaData"]["totalParticipants"] += 1
   }
 
-  //then, if today's date has not been registered, add it
+  //then, if today's date has not been registered for the participant, add it
   let todayDate = getDate_YYYYMMDD();
+  console.log(currentMeet["participants"][participantId].hasOwnProperty(todayDate))
   if(!currentMeet["participants"][participantId].hasOwnProperty(todayDate)){
     currentMeet["participants"][participantId][todayDate] = 0;
-    currentMeet["metaData"]["totalDates"] += 1
+    //currentMeet["metaData"]["totalDates"] += 1
   }
 }
 

@@ -30,6 +30,7 @@ The structure to create a new meet JSON object is as follows:
 This is the main function of the script. It triggers the MeetingsMenu 
 */
 async function load_MeetingsMenu(){
+    load_interfaceButtons();
     await displayMeetings();
 }
 
@@ -55,10 +56,16 @@ async function display_SelectAMeeting_Menu(){
         createNewMeet();
     })
     //close MeetingsMenu
-    document.getElementById("Menus_selectMeeting_closeButton").addEventListener('click', (e) => {
+    document.getElementById("Menus_selectMeeting_closeButton").addEventListener('click', async (e) => {
         close_MeetingsMenu();
     })
+    //refresh MeetingsMenu
+    document.getElementById("MeetMas_headerRefresh").addEventListener('click', async (e) => {
+        close_MeetingsMenu();
+        load_MeetingsMenu();
+    })
 }
+
 
 /*
 Populates the MeetingsMenu with all the available meeting options from the storage
@@ -89,7 +96,11 @@ async function addMeetOption(meet){
     meetOption.appendChild(selectButton)
     selectButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        loadMeet(meet["meetId"]);
+        try {
+            loadMeet(meet["meetId"]);            
+        } catch (error) {
+            Message("An unexpected error has ocurred. Reload the page might be necessary for MeetMas to work properly.");
+        }
     })
 
 
@@ -113,9 +124,9 @@ async function addMeetOption(meet){
         editIcon.setAttribute("class", "Menus_selectMeeting_EditIcon");
         editButton.appendChild(editIcon)
     meetOption.appendChild(editButton)
-    editButton.addEventListener('click', (e) => {
+    editButton.addEventListener('click', async (e) => {
         e.stopPropagation();
-        editMeet(meet["meetId"]);
+        await editMeet(meet["meetId"]);     
     })
     
     //delete
@@ -125,14 +136,14 @@ async function addMeetOption(meet){
     meetOption.appendChild(deleteButton)
     deleteButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        deleteMeet(meet["meetId"]);
-    })
-
-
-    
+        try {
+            deleteMeet(meet["meetId"]);       
+        } catch (error) {
+            Message("An unexpected error has ocurred. Reload the page might be necessary for MeetMas to work properly.");
+        }
+    })    
     
     meetingsContainer.appendChild(meetOption)
-
 }
 
 /*
@@ -159,26 +170,34 @@ After this function is triggered, the control is transfered to registerParticipa
 */
 function loadMeet(meetId){
     let tempMeet
+    
     retrieveMeetFromStorage(meetId)
     .then(ans=>{
-        if(!checkValidJSON(ans))
-            return false
-            
-        currentMeet = ans;
-        tempMeet = ans
-        currentMeet["dates"].push(getDate_YYYYMMDD());
-        return true;
-    })
-    .then((gotMeet) => {
-        if(gotMeet){
-            close_MeetingsMenu();
-            startRegistering();
-            notify("meet " + tempMeet["meetName"] + " has been selected", tempMeet["meetName"]);
-        }        
-    })
-    .then(() => {
-        load_interfaceButtons();
-    })
+            try {  
+                if(!checkValidJSON(ans))
+                    return false;                      
+            } catch (error) {
+                Message("An unexpected error has ocurred. Reload the page might be necessary for MeetMas to work properly.");
+            }
+
+            currentMeet = ans;
+            tempMeet = ans
+
+            let todayDate = getDate_YYYYMMDD();
+            if( !currentMeet["dates"].includes(todayDate))
+                currentMeet["dates"].push(todayDate);
+            return true;
+        })
+        .then((gotMeet) => {
+            if(gotMeet){
+                close_MeetingsMenu();
+                startRegistering();
+                notify("meet " + tempMeet["meetName"] + " has been selected", tempMeet["meetName"]);
+            }        
+        })
+        .then(() => {
+            forceReload();
+        })  
 }
 
 // DELETE MEET=========================================================================================
@@ -186,18 +205,26 @@ function loadMeet(meetId){
 Deletes one meeting from the storage
 */
 function deleteMeet(meetId){
-    removeMeet(meetId).then(() => {
+    return new Promise(resolve => {        
+        removeMeet(meetId).then(() => {
             //close all menus
             close_MeetingsMenu();
             //restart process
             load_MeetingsMenu();
-    })
+        }).then(() => {
+            return resolve();
+        })
+    });
 }
 
 // EDIT MEET=========================================================================================
-function editMeet(meetId){
-    retrieveMeetFromStorage(meetId).then(meet => {
-        display_editMeetingMenu(meet);
+async function editMeet(meetId){
+    retrieveMeetFromStorage(meetId).then(async meet => {
+        try {
+            await display_editMeetingMenu(meet);            
+        } catch (error) {
+            Message("An unexpected error has ocurred. Reload the page to make sure MeetMas works properly.");
+        }
     })
 }
 
@@ -237,25 +264,63 @@ function close_editMeetMenu(){
     removeHTMLNode_byId("MeetMas_editMeetMenu_background");
 }
 
-function updateMeet(meetToEdit){
-    let editMeet_input = document.getElementById("MeetMas_editMeetMenu_name_input");
-    validateName(editMeet_input.value).then(isValid => {
-        if(!isValid)
-            return
-        
-        deleteMeet(meetToEdit["meetId"]);
+async function updateMeet(meetToEdit){
+    let originalName = meetToEdit["meetId"];
 
-        meetToEdit["meetName"] = editMeet_input.value;
+    let nameUpdatedSuccessful = updateMeetName(meetToEdit);
+    let linkUpdatedSuccessful = updateMeetLink(meetToEdit);
+
+    console.log(meetToEdit)
+    if (!nameUpdatedSuccessful && !linkUpdatedSuccessful ){
+        console.log("ERROR=========================================")
+        return
+    }
+        
+    
+    deleteMeet(originalName).then(() => {
         updateMeetInStorage(meetToEdit).then(() => {
-            //close all menus
             close_editMeetMenu();
-            close_MeetingsMenu();
-            //restart process
-            load_MeetingsMenu();
         })
     })
 }
 
+/*
+Updates the name of the link in the temporary variable
+
+@return
+    A boolean value indicating if there was any error, not if it was updated
+*/
+function updateMeetLink(meetToEdit){
+    let updateLink_checkbox = document.getElementById("MeetMas_checkboxLink");
+    
+    if(updateLink_checkbox.checked){
+        meetToEdit["meetLink"] = window.location.href;
+    }
+    return true
+}
+
+
+
+/*
+Updates the name of the name in the temporary variable
+
+@return
+    A boolean value indicating if there was any error, not if it was updated
+*/
+function updateMeetName(meetToEdit){    
+    let editMeet_input = document.getElementById("MeetMas_editMeetMenu_name_input").value;
+    if(editMeet_input.localeCompare("") == 0)
+        return true;
+
+    //validate new name
+    validateName(editMeet_input).then(isValid => {
+        if(!isValid)
+            return false;
+        
+        meetToEdit["meetName"] = editMeet_input;
+        return true;
+    })
+}
 
 
 

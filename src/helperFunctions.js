@@ -111,7 +111,12 @@ function getRandomId(){
 }
 
 function getDate_YYYYMMDD(){
-  return new Date().getFullYear() + "/" +new Date().getMonth() + "/" + new Date().getDay();
+  //months and days start on 0
+  let date = new Date()
+  let year = date.getFullYear();
+  let month = date.toLocaleString('default', { month: 'long' });
+  let day = date.getDate()
+  return   year + "/" + month + "/" + day; 
 }
 
 

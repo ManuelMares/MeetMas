@@ -79,12 +79,11 @@ function createMeet(meet){
 function updateMeetInStorage(meet){
     return new Promise(resolve => {
         let newMeet = {};
-        newMeet[meet["meetId"]] = meet;       
+        newMeet[meet["meetId"]] = meet;
         chrome.storage.local.set(newMeet, function(result){
             return resolve()
         });
     });
-
 }
 
 

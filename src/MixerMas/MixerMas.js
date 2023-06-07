@@ -1,5 +1,5 @@
 
-let meetMasId = "peeeelfbdfnbnefepkclgfgbmfnnnpki";
+let meetMas_Id = "peeeelfbdfnbnefepkclgfgbmfnnnpki";
 MixerMasMain();
 async function MixerMasMain(){
     await loadMixerMasContainer();
@@ -49,17 +49,17 @@ async function diceHandler(){
 
     //load faces of the dice
     let face1 = document.getElementById("mixerMas_dice_front");
-    face1.innerHTML = '<img class="MixerMas_diceImage1" src="chrome-extension://'+meetMasId+'/src/MixerMas/images/face1.png"/>';
+    face1.innerHTML = '<img class="MixerMas_diceImage1" src="chrome-extension://'+meetMas_Id+'/src/MixerMas/images/face1.png"/>';
     let face2 = document.getElementById("mixerMas_dice_back");
-    face2.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMasId+'/src/MixerMas/images/face2.png"/>';
+    face2.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMas_Id+'/src/MixerMas/images/face2.png"/>';
     let face3 = document.getElementById("mixerMas_dice_right");
-    face3.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMasId+'/src/MixerMas/images/face3.png"/>';
+    face3.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMas_Id+'/src/MixerMas/images/face3.png"/>';
     let face4 = document.getElementById("mixerMas_dice_left");
-    face4.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMasId+'/src/MixerMas/images/face4.png"/>';
+    face4.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMas_Id+'/src/MixerMas/images/face4.png"/>';
     let face5 = document.getElementById("mixerMas_dice_top");
-    face5.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMasId+'/src/MixerMas/images/face5.png"/>';
+    face5.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMas_Id+'/src/MixerMas/images/face5.png"/>';
     let face6 = document.getElementById("mixerMas_dice_bottom");
-    face6.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMasId+'/src/MixerMas/images/face6.png"/>';
+    face6.innerHTML = '<img class="MixerMas_diceImage" src="chrome-extension://'+meetMas_Id+'/src/MixerMas/images/face6.png"/>';
     
     
     

@@ -32,6 +32,7 @@ let menu = null;
 let membersMenu = null;
 let chatMenu = null;
 let interfaceLoaded = false;
+let months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 
 
