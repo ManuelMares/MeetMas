@@ -300,6 +300,12 @@
     line-height: 35px;
 }
 
+.Menus_selectMeeting_noMeetings{
+    padding: 40px;
+    width: -webkit-fill-available;
+    font-size: 18px;
+    font-weight: 500;
+}
 
     
 

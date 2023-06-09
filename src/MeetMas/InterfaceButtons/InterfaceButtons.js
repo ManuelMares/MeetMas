@@ -74,10 +74,7 @@ function controlHiddenStatus(isHidden){
 }
 
 
-function openHomePage(){
-    window.open("",'_blank');
-    document.body.appendChild();
-}
+
 
 
 /* 

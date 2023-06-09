@@ -150,7 +150,7 @@ function getNewRange(){
         }
         range = []
         range.push( Number(temp[0]) )
-        range.push( Number(temp[1]) )
+        range.push( Number(temp[1])  + 1)
         
         return range;
             
@@ -357,7 +357,7 @@ function loadMixMasHideButton(isHidden){
         document.getElementById("mixermas_randomNumberButton").style.display = "inline";
         document.getElementById("mixermas_randomLetterButton").style.display = "inline";
         MixMas_hideButton.style.width = "120px";
-        MixMas_hideButton.innerHTML = "<";
+        MixMas_hideButton.innerHTML = "< Mixer Mas";
         return false
     }
     else{

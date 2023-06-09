@@ -63,6 +63,7 @@ header{
     font-size: 16px;
     justify-content: space-around;
     border: solid 1px var(--MeetMas-grey);
+    background-color: var(--MeetMas-white-hover);
 }
 .MeetMas_uplodFile_description{
     font-size: 18px;
@@ -97,14 +98,12 @@ header{
         background-color: var(--MeetMas-blue-active);
     }
 footer{
-    height: 15%;
+    height: 10%;
     width: 100%;
-    background-color: var(--MeetMas-white-hover);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    border: solid 1px var(--MeetMas-grey);
 }
 .MeetMas_MeetingsContainer{
     width: calc( 100% - 20px);

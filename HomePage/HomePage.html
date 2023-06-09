@@ -5,6 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            padding: 20px;
+            margin: 0;
+        }
+        h1{
+            width: calc(100% - 20px);
+            height: auto;
+            padding: 8px;
+            background-color: rgb(182 185 183);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        h2{
+            width: calc(100% - 100px);
+            height: auto;
+            padding: 5px 10px;
+            background-color: rgb(226, 228, 227);
+            display: flex;
+            font-weight: 600;
+            margin: 0 40px;
+        }
+        img{
+            width: 500px;
+            margin-left: 100px;
+            border: solid 1px #c3c3c3;
+            border-radius: 5px;
+        }
+        p{
+            font-size: 18px;
+            padding: 0 50px;
+            text-align: justify;
+        }
+        .remark{
+            background-color: #37c361;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            padding: 20px;
+            line-height: 18px;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to MeetMas</h1>
@@ -16,23 +60,24 @@
         What is available in this version:
     </h2>
     <p>
-        MeetMas:
+        MeetMas:<br>
             Create a file to keep track of the participations.
-            Poll participations randomly and using the smart feature
-        Add-ons:
-            MixerMas:
-                When in any other page (except a meeting or a 'chrome://*' page), get a shortcut for
-                a dice, and two randomizers, one for a list of words and another one for a range of numbers.
-            MessageMas:
-                A minimalistic tool that allows you to reply to low-complexity messages in the chat.
-                While the MessageMas can be used concatenating several replies, it is recommended to limit its use to a single chained reply. 
+            Poll participations randomly and using the smart feature.<br> <br>
+        MixerMas:<br>
+            When in any other page (except a meeting or a 'chrome://*' page), get a shortcut for
+            a dice, and two randomizers, one for a list of words and another one for a range of numbers.<br> <br>
+        MessageMas:<br>
+            A minimalistic tool that allows you to reply to low-complexity messages in the chat. 
     </p>
 
+    <h1>
+        Start
+    </h1>
     <h2>
-        Setting the extension
+        Pinning the Extension
     </h2>
     <p>
-        To being with, pin MeetMas to the browser to have easy access to all the features:<br/>
+        To begin using MeetMas, pin it to the browser to have easy access to all the features:<br/>
         Click in the extension button in your browser to reveal all the available extensions and click in the pin icon for MeetMas
     </p>
     <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/pin_meet_mas.png" alt="pinning icon to browser bar">
@@ -44,112 +89,174 @@
 
 
 
-    <h2>
-        Participation files
-    </h2>
-    <p>
-        MeetMas creates, keeps track and provides you with cvs (Excel) files for the participation registry in your meetings<br/>
-        You are in control of when the files are created, which file you are using, and what is considered a participation.
-    </p>
 
-    <h3>
-        Creating new participation files
-    </h3>
-    <p>
-        Everytime you open a meet, a menu will popup, allowing you to select, edit and create a new participation file.
-        This menu can also be accessed from the interface button 'select meet'. <br/>
-        The only requirement to create a participation file is to indicate a new name for it. Although the new created file will store the 
-        meeting link where it was created as metadata, you can update this link in the future by chosing to edit the file while in the new meet. <br>
-        Notice that a single meeting can have as many participation files as you require, and you can use a file in any meeting you open.<br>
 
-    </p>
 
-    <h3>
-        Working with participation files
-    </h3>
+
+
+    <h1>
+       Understanding the Participation Files
+    </h1>
     <p>
-        When a meet is started and a participation file is selected from the initial menu, new buttons and menus will appear to help you register participations for the active participants in the most efficient way.
+        MeetMas creates, keeps track and provides you with cvs (Excel) files to register the participation in your meetings. They are known as Participation Files. <br/>
+        You are in control of when the files are created, which file you are using (and where), and what is considered a participation.
     </p>
-        <h4>
-            Adding participants to the register
-        </h4>
+        <h2>
+            Participation Files Menu
+        </h2>
         <p>
-            Keep track of all the participants that have ever been in your meet is as easy as keep the members menu open.<br>
-            Everytime a new participant enters the meet, and as long as the members menu is open, the participant will be registered automatically.<br> 
-            This action only has to be done once per participant. Once the new participant is registered, everything is setup to keep working normally!
+            This menu appears every time you start a new meeting and it is available only while a meeting is open. This menu might look similar to the popup menu, but while the former one has the main purpose of managing the extension's settings (plus other handy functions), 
+            this menu focuses in managing the list of Participation Files only.
         </p>
-        <h4>Register a participation</h4>
+        <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/ParticipationFilesMenu.png" alt="Participation Files Menu">
         <p>
-            There are three sets of buttons that allow you to register participations:
-            <ul>
-                <li>
-                    Participation buttons from the chat 
-                </li>
-                <li>
-                    Participation buttons from the members menu 
-                </li>
-                <li>
-                    Participation buttons from the MeetMas menu 
-                </li>
-            </ul>
-            Click on the + button to add a participation, and on the - button to subtract it. When any of the buttons is clicked, a temporary notification will confirm th action
-            You can register as many participation as you want, and the final count will be a balance: total participations = positive participations - negative participations.<br>
-            Negative total participations are allowed.
+            This menu can be accessed at any other time while in a meeting, through the button "Participation Files" in the top left menu. This button might been hidden by the collapsed menu
         </p>
-        <h4>Edit a participation file</h4>
-        <p>
-            In the initial menu, click on the yellow button in order to change the name of your file
-        </p>
-        <h4>Delete participation file</h4>
-        <p>
-            In the initial menu, click on the red button of the participation file to delete.<br>
-            Be careful, this action cannot be undone, so it is a good idea to download the file first in case you need to use in the future as a backup file to create a new participation file
-        </p>
+        <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/ParticipationFilesButton.png" alt="Participation Files Button">
         
-    <h3>
-        MeetMas Menu
-    </h3>
+        <h2>
+            Creating New Participation Files
+        </h2>
+        <p>
+            Open the Participation File Menu, and click in the 'new participation file' button at the bottom. The only requirement to create a participation file is to indicate a new name for it. 
+            The link where the file is created will be stored as part of the metadata providing you with easy access to it from the popup menu. This link can be updated.
+            Notice that a single meeting can be used to create as many participation files as you require. Also, you can use any participation file in any meeting you open. 
+            However, this is not recommended and it is discouraged.<br>
+
+        </p>
+
+        <h2>
+            Load Participation Files
+        </h2>
+        <p>
+            In order to avoid confusion, this option is only available in the popup menu. <br/>
+            While the popup menu is open, the middle section will allow you to load the participation file. Be very carefully in how this file is manipulated before uploading it.
+            The participation file has to be a cvs file, and has to be formatted in the original style. If you have modify it and are not sure of how it should look, you can download a new participation file and copy its structure.<br/>
+            It is also important to notice that the name used to store the file is the one indicated inside the file, in the field 'meet name', instead of the file name.
+            <br>
+        </p>
+        <p class="remark"> 
+
+            It is recommended that once the file has been uploaded, you downloaded it again to verify that the format is the expected one, or to make the corresponding corrections. <br/>
+            The order of the participants is not guaranteed to be the same as the one from the uploaded file. That should be the only acceptable difference
+        </p>
+        <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/upload_participation_file.png" alt="Participation Files Button">
+        <h2>
+            Edit the Participation File's Metadata
+        </h2>
+        <p>
+            In the Participation File Menu, identify the file you want to edit, then click in the yellow icon to modify it.<br>
+            A new menu will show up, allowing you to update the name. It will also give you the option of updating the link to the meet you have open right now.<br>
+            The link cannot be manually updated to any other value or any other menu to guarantee that the links used are always valid and useful from the popup menu.
+        </p>
+        <h2>Delete Participation Files</h2>
+        <p>
+            In the Participation Files Menu, identify the file you want to edit, then click in the red button to modify it.<br>
+            Be careful, this action cannot be undone, so it is a good idea to download the file first from the popup, and use it as a backup file in case you need it in the future.
+        </p>
+
+
+
+
+
+
+
+
+
+
+
+
+    <h1>
+        Working with Participation Files
+    </h1>
     <p>
-        MeetMas menu is available when a participation file is selected in order to take advantage of the participants register system. <br>
+        Once you have created and selected a participation file to work with, you can use the interface buttons to simplify your work.
+    </p>
+        <h2>
+            Adding Participants
+        </h2>
+        <p>
+            The list of members provided by Google Meets is the only and necessary way of adding new participants to the registry.
+            The registration occurs automatically, as long as this members menu is visible. <br>
+            Make sure you open the members menu at least once when new participants are added to the menu. 
+        </p>
+        <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/members_menu.png" alt="Members Menu">
+        <h2>Registering a participation</h2>
+        <p>
+            This action can be done from the members menu or the chat (also from the MeetMas Menu). <br>
+            Next to each member's name, you will find out a set of two buttons: a green one to increase the participation by one, and a blue one to decrease it by one.
+            Once a participation is added, a notification will appear confirming the action. <br/>
+            You will notice that you cannot add a participation to yourself from the chat, but it is still possible to do it from the members menu.<br/>
+            It is possible to leave participants with negative total participations.
+        </p>
+        <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/participation_buttons.png" alt="Members Menu">
+        
+
+
+
+
+
+
+
+
+    <h1>
+        MeetMas Menu
+    </h1>
+    <p>
+        The MeetMas menu is available only when a participation file is selected. Its goal is to take advantage of the participants register system. <br>
         To open the menu, click on the MeetMas Menu button on the top left corner of the meet. The menu will display on the right just as all the native menus do.<br>
-        Once the menu is open, you can see all the members that have ever been part of you meeting, and keep track of their participations. 
+    </p>
+    <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/MeetMas_menu_button.png" alt="Members Menu">
+    
+    <p>    
+        Once the menu is open, you can see all the members that have ever been part of you meeting, and keep adding participations. 
         Additionally, new features are provided as button on the top part
     </p>
-        <h4>
+    <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/MeetMas_menu.png" alt="Members Menu">
+    
+        <h2>
             Update MeetMas Menu
-        </h4>
+        </h2>
         <p>
             As mentioned before, all new users can only be registered when the members menu is open. 
-            You can use the Update list shortcut to trigger this action. When done, the MeetMas Menu will be displayed automatically again
+            You can use the 'Update MeetMas Menu' shortcut to trigger this action. This button will display the members menu momentarelly, then it will bring back the updated MeeMas Menu.  
         </p>
-        <h4>
+        <h2>
             Random participant
-        </h4>
+        </h2>
         <p>
-            A random member of your meet will be polled. The list of users will be the historical list provided in the menu, not the list
-            of active members displayed in the regular members menu.<br>
-            An active notification will be displayed to indicate you the polled member
+            A random member of your meet will be polled. The user will be obtained from the historical list provided in the MeeMas Menu;
+            that is, it will include all the members that have ever been in the meeting, not just the ones that are present in the moment. <br/>
+            An active notification will be displayed to indicate you the name of the polled member.
         </p>
-        <h4>
+        <h2>
             Smart Random Participant
-        </h4>
+        </h2>
         <p>
             The users will be sorted to identify the members with less participations. From this resultant list, a random user will be polled<br>
             When the user gets selected, an active notification will be displayed.
         </p>
-        <h4>
-            Excluding members from the polling
-        </h4>
-        <p>
-            This feature remains to be implemented due to the logic complexity, but here we provide you with a work around for the Smart Random Participant function:
-            For the users you want to exclude, add a relative large amount of participations.
+        <p class="remark">
+            To exclude particular members from the smart polling, you can add an arbitrary large amount of participations to them, in such way that there are members with less participations than them, and they get excluded from the polling. 
         </p>
-        <h3>
-            Download participation files
-        </h3>
-        <p>
-            The downloading of participation files can be done anywhere and at any time, but only from the popup menu.<br>
-            Click in the extension icon to display the popup, then identify the file you want to download, and click in the download button to obtain the file. 
-        </p>
+
+    <h1>
+        Message Mas
+    </h1>
+    <p>
+        Message mas is a minimalistic and simple interface to reply messages in the chat.<br/>
+        While it allows to reply a series of replies, this function is recommended to be used with only one level of reply at a time.
+    </p>
+    <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/MessageMas.png" alt="Members Menu">
+    
+    <h1>
+        Mixer Mas
+    </h1>
+    <p>
+        Mixer Mas is the only tool that is available in all pages (except those starting with 'chrome://').<br/>
+        This feature allows you roll a dice, randomize a list of words, and randomize a range of numbers in the easiest way ever.<br/>
+    </p>
+    <img class="HomePage_img" src="chrome-extension://peeeelfbdfnbnefepkclgfgbmfnnnpki/HomePage/MixerMas.png" alt="Members Menu">
+    
 </body>
 </html>

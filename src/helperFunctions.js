@@ -288,4 +288,15 @@ function downloadParticipationReport(meeting){
   );
 
 
+async function openHomePage(){    
+  chrome.runtime.sendMessage(
+      {
+          type: "openTutorial",
+      },
+      function (response){
+          resolve(response)
+          reject();
+      }
+  )
+}
   

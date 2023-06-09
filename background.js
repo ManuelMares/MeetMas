@@ -8,6 +8,9 @@ chrome.runtime.onMessage.addListener(
             } )
             .then( console.log("background received and resent info from popup to script"))
         }
+        if(request.type == "openTutorial"){
+            chrome.tabs.create({ url: chrome.runtime.getURL("HomePage/HomePage.html") });
+        }
         //this return keeps the port open until an answer is returned
         return true;
     }

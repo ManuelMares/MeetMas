@@ -73,6 +73,13 @@ Populates the MeetingsMenu with all the available meeting options from the stora
 async function display_SelectAMeeting_Meetings(){
     retrieveMeetings()
     .then(async meetings => {
+        if(meetings.length > 0){
+            document.getElementById("Menus_selectMeeting_meetsOptions_container").innerHTML = "";
+        }else{
+            document.getElementById("MeetMas_openTutorial").addEventListener('click', () => {
+                openHomePage();
+            })
+        }
         for (let index = 0; index < meetings.length; index++) {
             addMeetOption(meetings[index]);            
         }
