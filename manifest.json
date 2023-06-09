@@ -1,9 +1,9 @@
 {
     "manifest_version": 3,
     "name": "MeetMas",
-    "description": "MeetMas is an extension for Google Meets focused on professors productivity. It provides features such as participation tracking and participants polling",
+    "description": "This extension for Google Meets focuses on professors. It provides features such as participation tracking and participants polling",
     "version": "1.0",
-    "permissions": ["storage", "activeTab", "scripting", "tabs", "bookmarks", "unlimitedStorage"],
+    "permissions": ["storage", "activeTab", "scripting", "unlimitedStorage"],
     "background": {"service_worker": "background.js"},
     "content_scripts":[
         {
