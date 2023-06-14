@@ -30,8 +30,8 @@ The structure to create a new meet JSON object is as follows:
 This is the main function of the script. It triggers the MeetingsMenu 
 */
 async function load_MeetingsMenu(){
+    Message("Don't forget to use the button Participation files to start registering participations.", "select_participation_file");
     load_interfaceButtons();
-    await displayMeetings();
 }
 
 /*
@@ -63,6 +63,7 @@ async function display_SelectAMeeting_Menu(){
     document.getElementById("MeetMas_headerRefresh").addEventListener('click', async (e) => {
         close_MeetingsMenu();
         load_MeetingsMenu();
+        displayMeetings();
     })
 }
 
@@ -218,6 +219,7 @@ function deleteMeet(meetId){
             close_MeetingsMenu();
             //restart process
             load_MeetingsMenu();
+            displayMeetings();
         }).then(() => {
             return resolve();
         })
@@ -410,6 +412,7 @@ function storeNewMeet(){
             close_MeetingsMenu();
             //restart process
             load_MeetingsMenu();
+            displayMeetings();
         })
     })
 }

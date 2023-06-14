@@ -35,8 +35,8 @@
     "web_accessible_resources": [
         {
         "resources" :   [   
+                            "src/notifications/notification.css", "src/notifications/notification.html",
                             "src/MeetMas/participationButtons/participationButtons.html", "src/MeetMas/participationButtons/participationButtons.css",
-                            "src/notifications/notification.html", "src/notifications/notification.css",
                             "src/MeetMas/SelectMeeting/selectMeeting.html", "src/MeetMas/SelectMeeting/menusCSS.css", "src/MeetMas/SelectMeeting/createMeetMenu.html", "src/MeetMas/SelectMeeting/editMeetMenu.html",
                             "src/Menus/selectMeeting_option.html", "src/edit.svg",  "edit.svg",
                             "src/MeetMas/MeetMasMenu/MeetMasMenu.html", 

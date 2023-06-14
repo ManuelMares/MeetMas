@@ -150,7 +150,6 @@ async function Message(message, id){
   
   //put in body
   document.body.appendChild(notification);
-
   //update all names to include the id
   //container
   let container = document.getElementById("meetMas_notification_Container");

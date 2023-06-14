@@ -21,8 +21,9 @@ async function load_interfaceButtons(){
     hideInterfaceMenuButton.addEventListener("click", (e) =>{
         isHidden = controlHiddenStatus(isHidden);
     })  
-    meetingsMenuButton.addEventListener("click", (e) =>{
-        load_MeetingsMenu();
+    meetingsMenuButton.addEventListener("click", (e) =>{        
+        load_interfaceButtons();
+        displayMeetings();
     })  
     reloadExtensionButton.addEventListener("click", (e) =>{   
         if(checkValidJSON(currentMeet))
